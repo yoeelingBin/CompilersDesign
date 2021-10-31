@@ -1,0 +1,7 @@
+# 2.sealpp
+
+Float func max(Float x, Float y)
+{
+    if x > y{return x;}
+    return y;
+}

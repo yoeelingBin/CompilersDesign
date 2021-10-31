@@ -1,0 +1,38 @@
+#name 3.sealpp
+#2 TYPEID Void
+#2 func main
+#2 (
+#2 )
+#2 {
+#3 TYPEID Int
+#3 OBJECTED x
+#3 :=
+#3 CONST 7
+#3 ;
+#4 TYPEID Int
+#4 OBJECTED y
+#4 :=
+#4 CONST 5
+#4 ;
+#5 KEYWORD while
+#5 OBJECTED x
+#5 <
+#5 CONST 10
+#5 {
+#6 OBJECTED x
+#6 :=
+#6 OBJECTED x
+#6 +
+#6 CONST 1
+#6 ;
+#7 OBJECTED y
+#7 :=
+#7 OBJECTED y
+#7 +
+#7 CONST 2
+#7 ;
+#8 }
+#9 KEYWORD return
+#9 ;
+#10 }
+lines:11,words:29,chars:132

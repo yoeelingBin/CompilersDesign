@@ -1,0 +1,114 @@
+#name 5.sealpp
+#2 TYPEID Void
+#2 func main
+#2 (
+#2 )
+#3 {
+#4 TYPEID Float
+#4 OBJECTED x1
+#4 :=
+#4 CONST 12234432.3456
+#4 ;
+#5 TYPEID Float
+#5 OBJECTED x2
+#5 :=
+#5 CONST 33
+#5 ;
+#6 TYPEID Float
+#6 OBJECTED x3
+#6 :=
+#6 CONST 34
+#6 ;
+#7 TYPEID Int
+#7 OBJECTED y
+#7 :=
+#7 CONST 256
+#7 ;
+#8 TYPEID Float
+#8 OBJECTED x4
+#8 :=
+#8 OBJECTED x1
+#8 %
+#8 OBJECTED x2
+#8 ;
+#9 TYPEID Bool
+#9 OBJECTED k
+#9 :=
+#9 (
+#9 OBJECTED x1
+#9 <
+#9 OBJECTED x2
+#9 )
+#9 &
+#9 (
+#9 OBJECTED x2
+#9 <=
+#9 OBJECTED x3
+#9 )
+#9 &&
+#9 (
+#9 OBJECTED x3
+#9 <
+#9 OBJECTED x1
+#9 )
+#9 |
+#9 (
+#9 OBJECTED x3
+#9 >=
+#9 OBJECTED x1
+#9 )
+#10 TYPEID Bool
+#10 OBJECTED g
+#10 :=
+#10 (
+#10 OBJECTED x1
+#10 >=
+#10 OBJECTED x2
+#10 )
+#10 |
+#10 (
+#10 OBJECTED x2
+#10 >
+#10 OBJECTED x3
+#10 )
+#10 ||
+#10 (
+#10 OBJECTED x3
+#10 >=
+#10 OBJECTED x1
+#10 )
+#10 &&
+#10 (
+#10 OBJECTED x4
+#10 >
+#10 CONST 5
+#10 )
+#10 ==
+#10 CONST 1
+#11 TYPEID Float
+#11 OBJECTED kk
+#11 :=
+#11 (
+#11 (
+#11 CONST 1
+#11 +
+#11 CONST 2
+#11 +
+#11 CONST 4
+#11 )
+#11 /
+#11 CONST 7
+#11 )
+#11 *
+#11 CONST 9
+#11 -
+#11 CONST 7
+#11 ;
+#12 KEYWORD fprintf
+#12 (
+#12 %lld
+#12 %f
+#13 KEYWORD return
+#13 ;
+#14 }
+lines:15,words:50,chars:390

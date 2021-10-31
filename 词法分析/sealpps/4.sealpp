@@ -1,0 +1,13 @@
+# 4.sealpp
+
+Void func main(){
+ Int x := 0;
+ Int s := 7;
+ Int p := 88;
+ aafor x := 0; x < 10; x := x + 1
+{
+    s := s + x;
+    p := x + 3;
+}
+return;
+}

@@ -1,0 +1,24 @@
+#name 2.sealpp
+#2 TYPEID Float
+#2 func max
+#2 (
+#2 TYPEID Float
+#2 OBJECTED x
+#2 TYPEID Float
+#2 OBJECTED y
+#2 )
+#3 {
+#4 KEYWORD if
+#4 OBJECTED x
+#4 >
+#4 OBJECTED y
+#4 {
+#4 KEYWORD return
+#4 OBJECTED x
+#4 ;
+#4 }
+#5 KEYWORD return
+#5 OBJECTED y
+#5 ;
+#6 }
+lines:7,words:17,chars:87

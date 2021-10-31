@@ -1,0 +1,20 @@
+#name 1.sealpp
+#2 TYPEID Void
+#2 func main
+#2 (
+#2 )
+#2 {
+#3 TYPEID Float
+#3 OBJECTED x
+#3 :=
+#3 CONST 6.0
+#3 ;
+#4 TYPEID Bool
+#4 OBJECTED y
+#4 :=
+#4 CONST 1
+#4 ;
+#5 KEYWORD return
+#5 ;
+#6 }
+lines:7,words:15,chars:81

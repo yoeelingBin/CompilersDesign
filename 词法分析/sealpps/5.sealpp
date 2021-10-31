@@ -1,0 +1,15 @@
+# 5.sealpp
+
+Void func main()
+{
+    Float x1 := 12234432.3456;
+    Float x2 := 33;
+    Float x3 := 34; #Float xxxx := 5;
+    Int y := 256;
+    Float x4 := x1%x2;
+    Bool k := (x1<x2)&(x2<=x3)&&(x3<x1)|(x3>=x1)
+    Bool g := (x1>=x2)|(x2>x3)||(x3>=x1)&&(x4>5)==1
+    Float kk := ((1+2+4)/7)*9-7;
+    fprintf(stderr,"\nnumber of the digit:%lld\t, float x:%f\n",nDigitNumber,x);
+    return;
+}
