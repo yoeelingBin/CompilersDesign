@@ -7,13 +7,21 @@ int words = 0;
 int chars = 0;
 %}
 
+DELIM [\t " "]
+WS {DELIM}+
+NEWLINE [\n]+
 DIGIT [0-9]
 LETTER [a-zA-Z]
-ID [a-z]({LETTER}|_|DIGIT)*
-SYMBOL ("%"|"~"|"^"|"-"|"*"|"/"|"+"|";"|"="|":"|"|"|"&"|"{"|"}"|"("|")"|"<"|">"|">="|"<="|"&&"|"||"|"%f"|"%s"|"%lld") 
+OBJECTED [a-z]({LETTER}|_|DIGIT)*
+OPT ("+"|"-"|"*"|"/"|"^"|"&"|"|"|"~"|":="|">"|">="|"=="|"!="|"<="|"<"|"&&"|"||"|"!!=")
+BRACKET (";"|"("|")"|"{"|"}")
+PLAHOLD ("%f"|"%s"|"%lld") 
+KEYWORD (fprintf)|(while)|(aafor)|(if)|(else)|(continue)|(break)|(return)|(func)
 INT {DIGIT}+
 FLOAT {DIGIT}+"."{DIGIT}+
+CONST ({INT}|{DIGIT})
 TYPEID (Int)|(Float)|(String)|(Bool)|(Void)
+
 
 %%
 
