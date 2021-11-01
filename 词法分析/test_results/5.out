@@ -108,7 +108,11 @@
 #12 (
 #12 %lld
 #12 %f
+#12 OBJECTED y
+#12 OBJECTED x1
+#12 )
+#12 ;
 #13 KEYWORD return
 #13 ;
 #14 }
-lines:15,words:50,chars:390
+lines:15,words:46,chars:346

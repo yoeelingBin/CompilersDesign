@@ -10,6 +10,6 @@ Void func main()
     Bool k := (x1<x2)&(x2<=x3)&&(x3<x1)|(x3>=x1)
     Bool g := (x1>=x2)|(x2>x3)||(x3>=x1)&&(x4>5)==1
     Float kk := ((1+2+4)/7)*9-7;
-    fprintf(stderr,"\nnumber of the digit:%lld\t, float x:%f\n",nDigitNumber,x);
+    fprintf(stderr,"%lld  %f",y,x1);
     return;
 }
