@@ -24,6 +24,7 @@ TYPEID (Int)|(Float)|(String)|(Bool)|(Void)
 
 
 %%
+NEWLINE {lines++; chars++}
 
 %%
 int main(){
