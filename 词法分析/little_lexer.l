@@ -8,6 +8,7 @@ int chars = 0;
 
 void count_chars(int yyleng);
 void count_words();
+void count_words_especially(char* yytext, int yyleng);
 void count_lines(char* yytext, int yyleng);
 %}
 
@@ -30,9 +31,9 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 
 
 %%
-{FILE} {printf("#name %s\n", yytext+2); count_chars(yyleng);}
+{FILE} {printf("#name %s\n", yytext+2); count_chars(yyleng); count_words();}
 {WS} {count_chars(yyleng); count_words(); count_lines(yytext, yyleng);}
-{COMMENT} {count_chars(yyleng);}
+{COMMENT} {count_chars(yyleng); count_words_especially(yytext, yyleng);}
 {KEYWORD} {printf("#%d KEYWORD %s\n", lines, yytext); count_chars(yyleng);}
 {TYPEID} {printf("#%d TYPEID %s\n", lines, yytext); count_chars(yyleng);}
 {OPT} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
@@ -42,7 +43,7 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 {OBJECTED} {printf("#%d OBJECTED %s\n", lines, yytext); count_chars(yyleng);}
 {FLOAT} {printf("#%d CONST %s\n", lines, yytext); count_chars(yyleng);}
 {INT} {printf("#%d CONST %d\n", lines, atoi(yytext)); count_chars(yyleng);}
-{FUNC} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
+{FUNC} {printf("#%d %s\n", lines, yytext); count_chars(yyleng); count_words_especially(yytext, yyleng);}
 . {count_chars(yyleng);}
 %%
 
@@ -58,6 +59,14 @@ void count_chars(int yyleng){
 
 void count_words(){
     words++;
+}
+
+void count_words_especially(char* yytext, int yyleng){
+    for (int i = 0; i < yyleng; ++i)
+    {
+        if (yytext[i] == ' ' || yytext[i] == '\t' || yytext[i] == '\n')
+            words++;
+    }
 }
 
 void count_lines(char* yytext, int yyleng){
