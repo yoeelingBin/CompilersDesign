@@ -2,18 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int lines = 1;
+int lines = 0;
 int words = 0;
 int chars = 0;
 
 void count_chars(int yyleng);
 void count_words();
-void count_lines();
+void count_lines(char* yytext, int yyleng);
 %}
 
-DELIM [\t\ ]
+DELIM [ \t\n]
 WS {DELIM}+
-NEWLINE [\n]+
 DIGIT [0-9]
 LETTER [a-zA-Z]
 FUNC func\ {OBJECTED}
@@ -31,9 +30,8 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 
 
 %%
-{NEWLINE} {count_lines(); count_chars(yyleng); count_words();}
 {FILE} {printf("#name %s\n", yytext+2); count_chars(yyleng);}
-{WS} {count_chars(yyleng); count_words();}
+{WS} {count_chars(yyleng); count_words(); count_lines(yytext, yyleng);}
 {COMMENT} {count_chars(yyleng);}
 {KEYWORD} {printf("#%d KEYWORD %s\n", lines, yytext); count_chars(yyleng);}
 {TYPEID} {printf("#%d TYPEID %s\n", lines, yytext); count_chars(yyleng);}
@@ -59,11 +57,15 @@ void count_chars(int yyleng){
 }
 
 void count_words(){
-     words++;
+    words++;
 }
 
-void count_lines(){
-    lines++;
+void count_lines(char* yytext, int yyleng){
+    for (int i = 0; i < yyleng; i++)
+    {
+        if (yytext[i] == '\n')
+            lines++;
+    }
 }
 
 int yywrap()
