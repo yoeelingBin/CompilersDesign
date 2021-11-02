@@ -540,8 +540,10 @@ char *yytext;
 int lines = 1;
 int words = 0;
 int chars = 0;
-#line 544 "lex.yy.c"
-#line 545 "lex.yy.c"
+
+void count_chars(int yyleng);
+#line 546 "lex.yy.c"
+#line 547 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -761,9 +763,9 @@ YY_DECL
 		}
 
 	{
-#line 29 "./little_lexer.l"
+#line 31 "./little_lexer.l"
 
-#line 767 "lex.yy.c"
+#line 769 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -824,85 +826,85 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 30 "./little_lexer.l"
-{++lines; ++chars;}
+#line 32 "./little_lexer.l"
+{++lines; count_chars(yyleng);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 31 "./little_lexer.l"
-{printf("#name %s\n", yytext+2);}
+#line 33 "./little_lexer.l"
+{printf("#name %s\n", yytext+2); count_chars(yyleng);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 32 "./little_lexer.l"
-{}
+#line 34 "./little_lexer.l"
+{count_chars(yyleng);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 33 "./little_lexer.l"
-{}
+#line 35 "./little_lexer.l"
+{count_chars(yyleng);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 34 "./little_lexer.l"
-{printf("#%d KEYWORD %s\n", lines, yytext);}
+#line 36 "./little_lexer.l"
+{printf("#%d KEYWORD %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "./little_lexer.l"
-{printf("#%d TYPEID %s\n", lines, yytext);}
+#line 37 "./little_lexer.l"
+{printf("#%d TYPEID %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 36 "./little_lexer.l"
-{printf("#%d %s\n", lines, yytext);}
+#line 38 "./little_lexer.l"
+{printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 37 "./little_lexer.l"
-{printf("#%d %s\n", lines, yytext);}
+#line 39 "./little_lexer.l"
+{printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 38 "./little_lexer.l"
-{printf("#%d %s\n", lines, yytext);}
+#line 40 "./little_lexer.l"
+{printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 39 "./little_lexer.l"
-{}
+#line 41 "./little_lexer.l"
+{count_chars(yyleng);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 40 "./little_lexer.l"
-{printf("#%d OBJECTED %s\n", lines, yytext);}
+#line 42 "./little_lexer.l"
+{printf("#%d OBJECTED %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 41 "./little_lexer.l"
-{printf("#%d CONST %s\n", lines, yytext);}
+#line 43 "./little_lexer.l"
+{printf("#%d CONST %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 42 "./little_lexer.l"
-{printf("#%d CONST %d\n", lines, atoi(yytext));}
+#line 44 "./little_lexer.l"
+{printf("#%d CONST %d\n", lines, atoi(yytext)); count_chars(yyleng);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 43 "./little_lexer.l"
-{printf("#%d %s\n", lines, yytext);}
+#line 45 "./little_lexer.l"
+{printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 44 "./little_lexer.l"
-{}
+#line 46 "./little_lexer.l"
+{count_chars(yyleng);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 45 "./little_lexer.l"
+#line 47 "./little_lexer.l"
 ECHO;
 	YY_BREAK
-#line 906 "lex.yy.c"
+#line 908 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1910,13 +1912,17 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 45 "./little_lexer.l"
+#line 47 "./little_lexer.l"
 
 
 int main(){
     yylex();
     fprintf(stderr,"lines:%d,words:%d,chars:%d\n", lines, words, chars);
     return 0;
+}
+
+void count_chars(int yyleng){
+    chars += yyleng;
 }
 
 int yywrap()

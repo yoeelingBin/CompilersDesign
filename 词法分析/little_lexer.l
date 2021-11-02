@@ -5,6 +5,8 @@
 int lines = 1;
 int words = 0;
 int chars = 0;
+
+void count_chars(int yyleng);
 %}
 
 DELIM [\t\ ]
@@ -27,27 +29,31 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 
 
 %%
-{NEWLINE} {++lines; ++chars;}
-{FILE} {printf("#name %s\n", yytext+2);}
-{WS} {}
-{COMMENT} {}
-{KEYWORD} {printf("#%d KEYWORD %s\n", lines, yytext);}
-{TYPEID} {printf("#%d TYPEID %s\n", lines, yytext);}
-{OPT} {printf("#%d %s\n", lines, yytext);}
-{BRACKET} {printf("#%d %s\n", lines, yytext);}
-{PLAHOLD} {printf("#%d %s\n", lines, yytext);}
-{STD} {}
-{OBJECTED} {printf("#%d OBJECTED %s\n", lines, yytext);}
-{FLOAT} {printf("#%d CONST %s\n", lines, yytext);}
-{INT} {printf("#%d CONST %d\n", lines, atoi(yytext));}
-{FUNC} {printf("#%d %s\n", lines, yytext);}
-. {}
+{NEWLINE} {++lines; count_chars(yyleng);}
+{FILE} {printf("#name %s\n", yytext+2); count_chars(yyleng);}
+{WS} {count_chars(yyleng);}
+{COMMENT} {count_chars(yyleng);}
+{KEYWORD} {printf("#%d KEYWORD %s\n", lines, yytext); count_chars(yyleng);}
+{TYPEID} {printf("#%d TYPEID %s\n", lines, yytext); count_chars(yyleng);}
+{OPT} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
+{BRACKET} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
+{PLAHOLD} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
+{STD} {count_chars(yyleng);}
+{OBJECTED} {printf("#%d OBJECTED %s\n", lines, yytext); count_chars(yyleng);}
+{FLOAT} {printf("#%d CONST %s\n", lines, yytext); count_chars(yyleng);}
+{INT} {printf("#%d CONST %d\n", lines, atoi(yytext)); count_chars(yyleng);}
+{FUNC} {printf("#%d %s\n", lines, yytext); count_chars(yyleng);}
+. {count_chars(yyleng);}
 %%
 
 int main(){
     yylex();
     fprintf(stderr,"lines:%d,words:%d,chars:%d\n", lines, words, chars);
     return 0;
+}
+
+void count_chars(int yyleng){
+    chars += yyleng;
 }
 
 int yywrap()
