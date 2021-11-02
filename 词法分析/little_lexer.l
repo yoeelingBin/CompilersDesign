@@ -7,6 +7,8 @@ int words = 0;
 int chars = 0;
 
 void count_chars(int yyleng);
+void count_words();
+void count_lines();
 %}
 
 DELIM [\t\ ]
@@ -29,9 +31,9 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 
 
 %%
-{NEWLINE} {++lines; count_chars(yyleng);}
+{NEWLINE} {count_lines(); count_chars(yyleng); count_words();}
 {FILE} {printf("#name %s\n", yytext+2); count_chars(yyleng);}
-{WS} {count_chars(yyleng);}
+{WS} {count_chars(yyleng); count_words();}
 {COMMENT} {count_chars(yyleng);}
 {KEYWORD} {printf("#%d KEYWORD %s\n", lines, yytext); count_chars(yyleng);}
 {TYPEID} {printf("#%d TYPEID %s\n", lines, yytext); count_chars(yyleng);}
@@ -54,6 +56,14 @@ int main(){
 
 void count_chars(int yyleng){
     chars += yyleng;
+}
+
+void count_words(){
+     words++;
+}
+
+void count_lines(){
+    lines++;
 }
 
 int yywrap()
