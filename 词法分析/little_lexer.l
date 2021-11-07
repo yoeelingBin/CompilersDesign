@@ -18,7 +18,7 @@ DIGIT [0-9]
 LETTER [a-zA-Z]
 FUNC func\ {OBJECTED}
 OBJECTED [a-z]({LETTER}|_|{DIGIT})*
-OPT ("+"|"-"|"*"|"/"|"^"|"&"|"|"|"~"|":="|">"|">="|"=="|"!="|"<="|"<"|"&&"|"||"|"!!=")
+OPT ("+"|"-"|"*"|"/"|"%"|"^"|"&"|"|"|"~"|":="|">"|">="|"=="|"!="|"<="|"<"|"&&"|"||"|"!!=")
 BRACKET (";"|"("|")"|"{"|"}")
 PLAHOLD ("%f"|"%s"|"%lld") 
 KEYWORD (fprintf)|(while)|(aafor)|(if)|(else)|(continue)|(break)|(return)
