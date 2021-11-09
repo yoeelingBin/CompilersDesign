@@ -1,0 +1,11 @@
+# 6.sealpp
+
+
+Void func func() {
+ fprintf(stdout, "abcdefgh%lld\n", 233);
+ return;
+}
+  
+Void func func2(){
+ return 1 ;
+}
