@@ -1,7 +1,7 @@
 # 6.sealpp
   # this is  sssssss 
 
-Void func func() {
+ Void func func() {
  fprintf(stdout, "abcdefgh%lld\n", 233);
  return;
 }
