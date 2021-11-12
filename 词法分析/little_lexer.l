@@ -10,6 +10,7 @@ void count_chars(int yyleng);
 void count_words();
 void count_words_especially(char* yytext, int yyleng);
 void count_lines(char* yytext, int yyleng);
+int isContiWS(char x);
 %}
 
 DELIM [ \t\n]
@@ -61,10 +62,14 @@ void count_words(){
     words++;
 }
 
+int isContiWS(char x){
+    return (x == ' ' || x == '\t' || x == '\n');
+}
+
 void count_words_especially(char* yytext, int yyleng){
     for (int i = 0; i < yyleng; ++i)
     {
-        if (yytext[i] == ' ' || yytext[i] == '\t' || yytext[i] == '\n')
+        if (isContiWS(yytext[i] ) && !isContiWS(yytext[i-1]))
             words++;
     }
 }
