@@ -379,7 +379,7 @@ static const flex_int16_t yy_accept[109] =
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    4,    5,    1,    6,    1,    7,    8,    1,    9,
        10,   11,   12,    1,   13,   14,   15,   16,   16,   16,
@@ -898,14 +898,16 @@ YY_RULE_SETUP
 #line 48 "./little_lexer.l"
 {count_chars(yyleng);}
 	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+#line 49 "./little_lexer.l"
+{yyterminate();}
+	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 49 "./little_lexer.l"
+#line 50 "./little_lexer.l"
 ECHO;
 	YY_BREAK
-#line 907 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 911 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1911,7 +1913,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 49 "./little_lexer.l"
+#line 50 "./little_lexer.l"
 
 
 int main(){
