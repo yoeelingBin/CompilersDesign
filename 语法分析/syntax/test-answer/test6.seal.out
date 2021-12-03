@@ -1,0 +1,191 @@
+#1
+Program
+  #1
+  Call Declaration
+    (name)
+    add2
+    (parameters)
+    (
+    #1
+    Variable
+      (type)
+      Int
+      (name)
+      x
+    )
+    (return type)
+    Int
+    (body)
+    #1
+    Statement Block
+      (variable declarations)
+      (
+      #2
+      Variable Declaration
+        #2
+        Variable
+          (type)
+          Int
+          (name)
+          sum
+      )
+      (statements)
+      (
+      #3
+      Assign
+        (left value)
+        sum
+        (right value)
+        #3
+        Const_int
+          (type)
+        : _no_type
+          (name)
+          0
+        (type)
+      : _no_type
+      #4
+      ForStmt
+        (init)
+        #4
+        No_expr
+        (condition)
+        #4
+        >
+          (OP left)
+          #4
+          Object
+            (type)
+          : _no_type
+            (name)
+            x
+          (OP right)
+          #4
+          Const_int
+            (type)
+          : _no_type
+            (name)
+            0
+          (type)
+        (loop)
+        #4
+        Assign
+          (left value)
+          x
+          (right value)
+          #4
+          -
+            (OP left)
+            #4
+            Object
+              (type)
+            : _no_type
+              (name)
+              x
+            (OP right)
+            #4
+            Const_int
+              (type)
+            : _no_type
+              (name)
+              1
+            (type)
+          : _no_type
+          (type)
+        : _no_type
+        (body)
+        #4
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #5
+          IfStmt
+            (condition)
+            #5
+            ==
+              (OP left)
+              #5
+              %
+                (OP left)
+                #5
+                Object
+                  (type)
+                : _no_type
+                  (name)
+                  x
+                (OP right)
+                #5
+                Const_int
+                  (type)
+                : _no_type
+                  (name)
+                  2
+                (type)
+              : _no_type
+              (OP right)
+              #5
+              Const_int
+                (type)
+              : _no_type
+                (name)
+                0
+              (type)
+            (then)
+            #5
+            Statement Block
+              (variable declarations)
+              (
+              )
+              (statements)
+              (
+              #6
+              ContinueStmt
+              )
+            (else)
+            #5
+            Statement Block
+              (variable declarations)
+              (
+              )
+              (statements)
+              (
+              )
+          #8
+          Assign
+            (left value)
+            sum
+            (right value)
+            #8
+            +
+              (OP left)
+              #8
+              Object
+                (type)
+              : _no_type
+                (name)
+                x
+              (OP right)
+              #8
+              Object
+                (type)
+              : _no_type
+                (name)
+                sum
+              (type)
+            : _no_type
+            (type)
+          : _no_type
+          )
+      #10
+      ReturnStmt
+        (return value)
+        #10
+        Object
+          (type)
+        : _no_type
+          (name)
+          sum
+      )

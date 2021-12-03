@@ -1,0 +1,34 @@
+#3
+Program
+  #3
+  Variable Declaration
+    #3
+    Variable
+      (type)
+      Int
+      (name)
+      a
+  #4
+  Variable Declaration
+    #4
+    Variable
+      (type)
+      Bool
+      (name)
+      b
+  #5
+  Variable Declaration
+    #5
+    Variable
+      (type)
+      String
+      (name)
+      c
+  #6
+  Variable Declaration
+    #6
+    Variable
+      (type)
+      Float
+      (name)
+      d

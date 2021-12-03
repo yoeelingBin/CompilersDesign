@@ -1,0 +1,10 @@
+Int a;
+
+Void func main() {
+    Int x;
+    x = getA();
+}
+
+Int func getA() {
+    return a;
+}

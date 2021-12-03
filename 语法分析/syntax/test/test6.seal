@@ -1,0 +1,11 @@
+Int func add2(Int x)  {
+    Int sum;
+    sum = 0;
+    for ; x > 0; x = x - 1 {
+        if x % 2 == 0 {
+            continue;
+        }
+        sum = x + sum;
+    }
+    return sum;
+}

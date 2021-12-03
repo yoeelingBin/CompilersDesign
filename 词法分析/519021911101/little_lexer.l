@@ -13,7 +13,7 @@ void count_lines(char* yytext, int yyleng);
 int isContiWS(char x);
 %}
 
-DELIM [ \t\n]
+DELIM [ \t\n\r]
 WS {DELIM}+
 DIGIT [0-9]
 LETTER [a-zA-Z]
@@ -46,6 +46,7 @@ FILE ^#\ (({LETTER}|{DIGIT})+\.sealpp)
 {INT} {printf("#%d CONST %d\n", lines, atoi(yytext)); count_chars(yyleng);}
 {FUNC} {printf("#%d %s\n", lines, yytext); count_chars(yyleng); count_words_especially(yytext, yyleng);}
 . {count_chars(yyleng);}
+<<EOF>> {yyterminate();}
 %%
 
 int main(){

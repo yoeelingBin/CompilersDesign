@@ -1,0 +1,8 @@
+Int func add(Int x)  {
+    Int sum;
+    
+    for sum = 0;x > 0; x = x - 1 {
+        sum = sum + x;
+    }
+    return sum;
+}
