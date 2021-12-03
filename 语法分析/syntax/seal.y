@@ -143,17 +143,52 @@
     documentation for details). */
     
     /* Declare types for the grammar's non-terminals. */
+    /*非终结符的声明*/
     %type <program> program
     %type <decls> decl_list
     %type <decl> decl
+    
+    %type <symbol> lvalue
+    %type <program> program
+    %type <variableDecl> variableDecl
+    %type <variableDecls> variableDecl_list
 
-	// Add more here
+    %type <variable> variable
+    %type <variables> variable_list
+
+    %type <call> call
+    %type <callDecl> callDecl
+
+    %type <stmt> stmt
+    %type <stmts> stmt_list
+    %type <stmtBlock> stmtBlock
+    %type <ifStmt> ifStmt
+    %type <whileStmt> whileStmt
+    %type <forStmt> forStmt
+    %type <breakStmt> breakStmt
+    %type <continueStmt> continueStmt
+    %type <returnStmt> returnStmt
+
+    %type <expr> expr
+    %type <exprs> expr_list
+
+    %type <actual> actual
+    %type <actuals> actual_list
 
     /* Precedence declarations go here. */
-	  %nonassoc '='
+    /*算符优先级声明*/
+    %left '~' '&' '|' '^'
+    %left '*' '/'
+    %left '%'
+    %left '+' '-'
+    %nonassoc UMINUS '!'
+	  %nonassoc '=' 
+    %nonassoc EQUAL NE
+    %nonassoc '<' LE GE '>'
+    %right OR
+    %right AND
 
-	// Add more here
-    
+
 %%
 
     /* Save the root of the abstract syntax tree in a global variable. */
