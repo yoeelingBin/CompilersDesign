@@ -149,7 +149,6 @@
     %type <decl> decl
     
     %type <symbol> lvalue
-    %type <program> program
     %type <variableDecl> variableDecl
     %type <variableDecls> variableDecl_list
 
