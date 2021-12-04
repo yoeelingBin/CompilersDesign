@@ -148,7 +148,6 @@
     %type <decls> decl_list
     %type <decl> decl
     
-    %type <symbol> lvalue
     %type <variableDecl> variableDecl
     %type <variableDecls> variableDecl_list
 
@@ -169,7 +168,6 @@
     %type <returnStmt> returnStmt
 
     %type <expr> expr
-    %type <exprs> expr_list
 
     %type <actual> actual
     %type <actuals> actual_list
@@ -293,17 +291,174 @@
     };
 
     /*stmt_list*/
-    stmt_list {
+    stmt_list: {
       $$ = single_Stmts($1);
     }
     | stmt_list {
       $$ = append_Stmts($1, single_Stmts($2));
     };
 
-    /**/
+    /*ifStmt->if Expr StmtBlock [else StmtBlock] */
+    ifStmt: IF expr stmtBlock ELSE stmtBlock {
+      $$ = ifstmt($2, $3, $5);
+    }
+    | IF expr stmtBlock{
+      $$ = ifstmt($2, $3, stmtBlock(nil_VariableDecls(), nil_Stmts());
+    };
 
+    /*WhileStmt->while Expr StmtBlock*/
+    whileStmt: WHILE expr stmtBlock{
+      $$ = whilestmt($2, $3);
+    };
 
-    
+    /*ForStmt->aafor [Expr];[Expr];[Expr] StmtBlock*/
+    forStmt: FOR expr ';' expr ';' expr stmtBlock{
+      $$ = forstmt($2, $4, $6, $7);
+    }
+    | FOR expr ';' expr ';' stmtBlock{
+      $$ = forstmt($2, $4, no_expr(), $6);
+    }
+    | FOR expr ';' ';' expr stmtBlock{
+      $$ = forstmt($2, no_expr(), $5, $6);
+    }
+    | FOR ';' expr ';' expr stmtBlock{
+      $$ = forstmt(no_expr(), $3, $5, $6);
+    }
+    | FOR expr ';' ';' stmtBlock{
+      $$ = forstmt($2, no_expr(), no_expr(), $5);
+    }
+    | FOR ';' expr ';' stmtBlock{
+      $$ = forstmt(no_expr(), $3, no_expr(), $5);
+    }
+    | FOR ';' ';' expr stmtBlock{
+      $$ = forstmt(no_expr(), no_expr(), $4, $5);
+    }
+    | FOR ';' ';' stmtBlock{
+      $$ = forstmt(no_expr(), no_expr(), no_expr(), $4);
+    };
+
+    /*ReturnStmt->return [Expr]; */
+    returnStmt: RETURN expr ';' {
+      $$ = returnstmt($2);
+    }
+    | RETURN ';' {
+      $$ = returnstmt(no_expr())
+    };
+
+    /*ContinueStmt->continue; */
+    continueStmt: CONTINUE ';' {
+      $$ = continuestmt();
+    };
+
+    /*BreakStmt->break; */
+    breakStmt: BREAK ';' {
+      $$ = breakstmt();
+    };
+
+    /*expr   too much!*/
+    expr: OBJECTID '=' expr {
+      $$ = assign($1, $3);
+    }
+    | CONST_INT {
+      $$ = const_int($1);
+    }
+    | CONST_BOOL {
+      $$ = const_bool($1);
+    }
+    | CONST_STRING {
+      $$ = const_string($1);
+    }
+    | CONST_FLOAT {
+      $$ = const_float($1);
+    }
+    | call {
+      $$ = $1;
+    }
+    | '(' expr ')' {
+      $$ = $2;
+    }
+    | OBJECTID {
+      $$ = object($1);
+    }
+    | expr '+' expr {
+      $$ = add($1, $3);
+    }
+    | expr '-' expr {
+      $$ = minus($1, $3);
+    }
+    | expr '*' expr {
+      $$ = multi($1, $3);
+    }
+    | expr '/' expr {
+      $$ = divide($1, $3);
+    }
+    | expr '%' expr {
+      $$ = mod($1, $3);
+    }
+    | '-' expr %prec UMINUS {
+      $$ = neg($2);
+    }
+    | expr '<' expr {
+      $$ = lt($1, $3);
+    }
+    | expr LE expr {
+      $$ = le($1, $3);
+    }
+    | expr EQUAL expr {
+      $$ = equ($1, $3);
+    }
+    | expr NE expr {
+      $$ = neq($1, $3);
+    }
+    | expr GE expr {
+      $$ = ge($1, $3);
+    }
+    | expr '>' expr {
+      $$ = gt($1, $3);
+    }
+    | expr AND expr {
+      $$ = and_($1, $3);
+    }
+    | expr OR expr {
+      $$ = or_($1, $3);
+    }
+    | expr '^' expr {
+      $$ = xor_($1, $3);
+    }
+    | '!' expr {
+      $$ = not_($2);
+    }
+    | '~' expr {
+      $$ = bitnot($2);
+    }
+    | expr '&' expr {
+      $$ = bitand_($1, $3);
+    }
+    | expr '|' expr {
+      $$ = bitor_($1, $3);
+    };
+
+    /*Call->OBJECTID(Actuals) */
+    call: OBJECTID '(' actual_list ')' {
+      $$ = call($1, $3);
+    }
+    | OBJECTID '(' ')' {
+      $$ = call($1, nil_Actuals());
+    };
+
+    /*actual->expr*/
+    actual: expr {
+      $$ = actual($1);
+    };
+
+    /*Actuals->[Expr[[,Expr]]* */
+    actual_list: actual {
+      $$ = single_Actuals($1);
+    }
+    | actual_list ',' actual {
+      $$ = append_Actuals($1, single_Actuals($3));
+    };
+
     /* end of grammar */
 %%
     
