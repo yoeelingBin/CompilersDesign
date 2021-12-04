@@ -54,17 +54,12 @@ extern int seal_yydebug;
     FUNC = 265,
     RETURN = 266,
     VAR = 271,
-    ERROR = 273,
     AND = 274,
     OR = 275,
     EQUAL = 276,
     NE = 277,
     GE = 278,
     LE = 279,
-    INT = 280,
-    STRING = 281,
-    BOOL = 282,
-    FLOAT = 283,
     CONST_BOOL = 267,
     CONST_INT = 268,
     CONST_STRING = 269,
@@ -84,17 +79,12 @@ extern int seal_yydebug;
 #define FUNC 265
 #define RETURN 266
 #define VAR 271
-#define ERROR 273
 #define AND 274
 #define OR 275
 #define EQUAL 276
 #define NE 277
 #define GE 278
 #define LE 279
-#define INT 280
-#define STRING 281
-#define BOOL 282
-#define FLOAT 283
 #define CONST_BOOL 267
 #define CONST_INT 268
 #define CONST_STRING 269
@@ -138,7 +128,7 @@ union YYSTYPE
       char *error_msg;
     
 
-#line 142 "seal.tab.h" /* yacc.c:1909  */
+#line 132 "seal.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

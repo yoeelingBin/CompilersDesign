@@ -233,7 +233,7 @@
 
     /*variable_list*/
     variable_list:  {
-      $$ = single_Variables($1);
+      $$ = nil_Variables();
     }
     |  variable_list ',' variable {
       $$ = append_Variables($1, single_Variables($3));
@@ -244,7 +244,7 @@
       $$ = callDecl($3, $5, $1, $7);
     };
     |  TYPEID FUNC OBJECTID '('  ')' stmtBlock{
-      $$ = callDecl($3, nil_Variables(), $1, $7);
+      $$ = callDecl($3, nil_Variables(), $1, $6);
     };
 
     /*stmtBlock->{variableDecl* stmt*} */
@@ -258,7 +258,7 @@
       $$ = stmtBlock($2, nil_Stmts());
     }
     | '{' '}' {
-      $$ = stmtBlock(nil_VariableDecls(), nil_Stmts())
+      $$ = stmtBlock(nil_VariableDecls(), nil_Stmts());
     };
 
     /*stmt->;|Expr;|IfStmt|WhileStmt|ForStmt|BreakStmt|ContinueStmt|returnStmt|stmtBlock*/
@@ -292,9 +292,9 @@
 
     /*stmt_list*/
     stmt_list: {
-      $$ = single_Stmts($1);
+      $$ = nil_Stmts();
     }
-    | stmt_list {
+    | stmt_list stmt {
       $$ = append_Stmts($1, single_Stmts($2));
     };
 
@@ -303,7 +303,7 @@
       $$ = ifstmt($2, $3, $5);
     }
     | IF expr stmtBlock{
-      $$ = ifstmt($2, $3, stmtBlock(nil_VariableDecls(), nil_Stmts());
+      $$ = ifstmt($2, $3, stmtBlock(nil_VariableDecls(), nil_Stmts()));
     };
 
     /*WhileStmt->while Expr StmtBlock*/
@@ -342,7 +342,7 @@
       $$ = returnstmt($2);
     }
     | RETURN ';' {
-      $$ = returnstmt(no_expr())
+      $$ = returnstmt(no_expr());
     };
 
     /*ContinueStmt->continue; */
