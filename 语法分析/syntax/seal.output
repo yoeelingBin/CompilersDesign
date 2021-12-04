@@ -460,9 +460,9 @@ State 26
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 46
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
@@ -524,9 +524,9 @@ State 31
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 46
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
@@ -554,9 +554,9 @@ State 32
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 60
@@ -572,9 +572,9 @@ State 33
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 61
@@ -597,9 +597,9 @@ State 34
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 62
     '('           shift, and go to state 47
 
@@ -631,9 +631,9 @@ State 37
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 66
     '('           shift, and go to state 47
 
@@ -684,16 +684,16 @@ State 42
 
 State 43
 
-   68 expr: '~' . expr
+   57 expr: '-' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 70
@@ -702,16 +702,16 @@ State 43
 
 State 44
 
-   57 expr: '-' . expr
+   67 expr: '!' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 71
@@ -720,16 +720,16 @@ State 44
 
 State 45
 
-   67 expr: '!' . expr
+   68 expr: '~' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 72
@@ -752,9 +752,9 @@ State 47
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 73
@@ -850,16 +850,16 @@ State 57
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ';'    shift, and go to state 90
 
 
@@ -904,16 +904,16 @@ State 60
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 91
@@ -945,16 +945,16 @@ State 61
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 92
@@ -972,9 +972,9 @@ State 62
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 93
     '('           shift, and go to state 47
 
@@ -1011,16 +1011,16 @@ State 63
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ';'    shift, and go to state 95
 
 
@@ -1071,16 +1071,16 @@ State 67
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ';'    shift, and go to state 96
 
 
@@ -1093,9 +1093,9 @@ State 68
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 97
@@ -1112,9 +1112,9 @@ State 69
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
     ')'           shift, and go to state 98
 
@@ -1125,43 +1125,6 @@ State 69
 
 
 State 70
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   68     | '~' expr .
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 68 (expr)
-
-
-State 71
 
    52 expr: expr . '+' expr
    53     | expr . '-' expr
@@ -1181,19 +1144,14 @@ State 71
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     $default  reduce using rule 57 (expr)
 
 
-State 72
+State 71
 
    52 expr: expr . '+' expr
    53     | expr . '-' expr
@@ -1213,16 +1171,34 @@ State 72
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     $default  reduce using rule 67 (expr)
+
+
+State 72
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   68     | '~' expr .
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    $default  reduce using rule 68 (expr)
 
 
 State 73
@@ -1251,16 +1227,16 @@ State 73
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ')'    shift, and go to state 102
 
 
@@ -1273,9 +1249,9 @@ State 74
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 103
@@ -1291,9 +1267,9 @@ State 75
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 104
@@ -1309,9 +1285,9 @@ State 76
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 105
@@ -1327,9 +1303,9 @@ State 77
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 106
@@ -1345,9 +1321,9 @@ State 78
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 107
@@ -1363,9 +1339,9 @@ State 79
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 108
@@ -1374,16 +1350,16 @@ State 79
 
 State 80
 
-   69 expr: expr '&' . expr
+   58 expr: expr '<' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 109
@@ -1392,16 +1368,16 @@ State 80
 
 State 81
 
-   70 expr: expr '|' . expr
+   63 expr: expr '>' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 110
@@ -1410,16 +1386,16 @@ State 81
 
 State 82
 
-   66 expr: expr '^' . expr
+   52 expr: expr '+' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 111
@@ -1428,16 +1404,16 @@ State 82
 
 State 83
 
-   54 expr: expr '*' . expr
+   53 expr: expr '-' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 112
@@ -1446,16 +1422,16 @@ State 83
 
 State 84
 
-   55 expr: expr '/' . expr
+   54 expr: expr '*' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 113
@@ -1464,16 +1440,16 @@ State 84
 
 State 85
 
-   56 expr: expr '%' . expr
+   55 expr: expr '/' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 114
@@ -1482,16 +1458,16 @@ State 85
 
 State 86
 
-   52 expr: expr '+' . expr
+   56 expr: expr '%' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 115
@@ -1500,16 +1476,16 @@ State 86
 
 State 87
 
-   53 expr: expr '-' . expr
+   69 expr: expr '&' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 116
@@ -1518,16 +1494,16 @@ State 87
 
 State 88
 
-   58 expr: expr '<' . expr
+   70 expr: expr '|' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 117
@@ -1536,16 +1512,16 @@ State 88
 
 State 89
 
-   63 expr: expr '>' . expr
+   66 expr: expr '^' . expr
 
     CONST_BOOL    shift, and go to state 38
     CONST_INT     shift, and go to state 39
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr  转到状态 118
@@ -1586,9 +1562,9 @@ State 93
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
 
@@ -1624,16 +1600,16 @@ State 94
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ';'    shift, and go to state 122
 
 
@@ -1649,9 +1625,9 @@ State 95
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     ';'           shift, and go to state 123
     '('           shift, and go to state 47
 
@@ -1692,8 +1668,16 @@ State 97
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
 
     $default  reduce using rule 44 (expr)
 
@@ -1731,16 +1715,16 @@ State 99
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
 
     $default  reduce using rule 73 (actual)
 
@@ -1788,7 +1772,21 @@ State 103
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
+    AND    shift, and go to state 74
+    EQUAL  shift, and go to state 76
+    NE     shift, and go to state 77
+    GE     shift, and go to state 78
+    LE     shift, and go to state 79
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
 
     $default  reduce using rule 64 (expr)
 
@@ -1813,8 +1811,22 @@ State 104
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
+    AND    shift, and go to state 74
+    OR     shift, and go to state 75
+    EQUAL  shift, and go to state 76
+    NE     shift, and go to state 77
+    GE     shift, and go to state 78
+    LE     shift, and go to state 79
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
 
     $default  reduce using rule 65 (expr)
 
@@ -1839,12 +1851,18 @@ State 105
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
     GE   shift, and go to state 78
     LE   shift, and go to state 79
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
+    '<'  shift, and go to state 80
+    '>'  shift, and go to state 81
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     EQUAL  error (nonassociative)
     NE     error (nonassociative)
@@ -1872,12 +1890,18 @@ State 106
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
     GE   shift, and go to state 78
     LE   shift, and go to state 79
-    '<'  shift, and go to state 88
-    '>'  shift, and go to state 89
+    '<'  shift, and go to state 80
+    '>'  shift, and go to state 81
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     EQUAL  error (nonassociative)
     NE     error (nonassociative)
@@ -1905,8 +1929,14 @@ State 107
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     GE   error (nonassociative)
     LE   error (nonassociative)
@@ -1936,8 +1966,14 @@ State 108
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     GE   error (nonassociative)
     LE   error (nonassociative)
@@ -1948,285 +1984,6 @@ State 108
 
 
 State 109
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   69     | expr '&' expr .
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 69 (expr)
-
-
-State 110
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-   70     | expr '|' expr .
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 70 (expr)
-
-
-State 111
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   66     | expr '^' expr .
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 66 (expr)
-
-
-State 112
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   54     | expr '*' expr .
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 54 (expr)
-
-
-State 113
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   55     | expr '/' expr .
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 55 (expr)
-
-
-State 114
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   56     | expr '%' expr .
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 56 (expr)
-
-
-State 115
-
-   52 expr: expr . '+' expr
-   52     | expr '+' expr .
-   53     | expr . '-' expr
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 52 (expr)
-
-
-State 116
-
-   52 expr: expr . '+' expr
-   53     | expr . '-' expr
-   53     | expr '-' expr .
-   54     | expr . '*' expr
-   55     | expr . '/' expr
-   56     | expr . '%' expr
-   58     | expr . '<' expr
-   59     | expr . LE expr
-   60     | expr . EQUAL expr
-   61     | expr . NE expr
-   62     | expr . GE expr
-   63     | expr . '>' expr
-   64     | expr . AND expr
-   65     | expr . OR expr
-   66     | expr . '^' expr
-   69     | expr . '&' expr
-   70     | expr . '|' expr
-
-    AND    shift, and go to state 74
-    OR     shift, and go to state 75
-    EQUAL  shift, and go to state 76
-    NE     shift, and go to state 77
-    GE     shift, and go to state 78
-    LE     shift, and go to state 79
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
-
-    $default  reduce using rule 53 (expr)
-
-
-State 117
 
    52 expr: expr . '+' expr
    53     | expr . '-' expr
@@ -2246,8 +2003,14 @@ State 117
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     GE   error (nonassociative)
     LE   error (nonassociative)
@@ -2257,7 +2020,7 @@ State 117
     $default  reduce using rule 58 (expr)
 
 
-State 118
+State 110
 
    52 expr: expr . '+' expr
    53     | expr . '-' expr
@@ -2277,8 +2040,14 @@ State 118
    69     | expr . '&' expr
    70     | expr . '|' expr
 
-    AND  shift, and go to state 74
-    OR   shift, and go to state 75
+    '+'  shift, and go to state 82
+    '-'  shift, and go to state 83
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
 
     GE   error (nonassociative)
     LE   error (nonassociative)
@@ -2286,6 +2055,216 @@ State 118
     '>'  error (nonassociative)
 
     $default  reduce using rule 63 (expr)
+
+
+State 111
+
+   52 expr: expr . '+' expr
+   52     | expr '+' expr .
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
+
+    $default  reduce using rule 52 (expr)
+
+
+State 112
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   53     | expr '-' expr .
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    '*'  shift, and go to state 84
+    '/'  shift, and go to state 85
+    '%'  shift, and go to state 86
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
+
+    $default  reduce using rule 53 (expr)
+
+
+State 113
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   54     | expr '*' expr .
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
+
+    $default  reduce using rule 54 (expr)
+
+
+State 114
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   55     | expr '/' expr .
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
+
+    $default  reduce using rule 55 (expr)
+
+
+State 115
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   56     | expr '%' expr .
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    '&'  shift, and go to state 87
+    '|'  shift, and go to state 88
+    '^'  shift, and go to state 89
+
+    $default  reduce using rule 56 (expr)
+
+
+State 116
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   69     | expr '&' expr .
+   70     | expr . '|' expr
+
+    $default  reduce using rule 69 (expr)
+
+
+State 117
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+   70     | expr '|' expr .
+
+    $default  reduce using rule 70 (expr)
+
+
+State 118
+
+   52 expr: expr . '+' expr
+   53     | expr . '-' expr
+   54     | expr . '*' expr
+   55     | expr . '/' expr
+   56     | expr . '%' expr
+   58     | expr . '<' expr
+   59     | expr . LE expr
+   60     | expr . EQUAL expr
+   61     | expr . NE expr
+   62     | expr . GE expr
+   63     | expr . '>' expr
+   64     | expr . AND expr
+   65     | expr . OR expr
+   66     | expr . '^' expr
+   66     | expr '^' expr .
+   69     | expr . '&' expr
+   70     | expr . '|' expr
+
+    $default  reduce using rule 66 (expr)
 
 
 State 119
@@ -2330,16 +2309,16 @@ State 121
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 128
@@ -2355,9 +2334,9 @@ State 122
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
 
@@ -2376,9 +2355,9 @@ State 123
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
 
@@ -2414,16 +2393,16 @@ State 124
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     ';'    shift, and go to state 133
 
 
@@ -2436,9 +2415,9 @@ State 125
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
 
     expr    转到状态 99
@@ -2500,16 +2479,16 @@ State 130
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 135
@@ -2548,16 +2527,16 @@ State 132
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 136
@@ -2573,9 +2552,9 @@ State 133
     CONST_STRING  shift, and go to state 40
     CONST_FLOAT   shift, and go to state 41
     OBJECTID      shift, and go to state 42
-    '~'           shift, and go to state 43
-    '-'           shift, and go to state 44
-    '!'           shift, and go to state 45
+    '-'           shift, and go to state 43
+    '!'           shift, and go to state 44
+    '~'           shift, and go to state 45
     '('           shift, and go to state 47
     '{'           shift, and go to state 19
 
@@ -2638,16 +2617,16 @@ State 138
     NE     shift, and go to state 77
     GE     shift, and go to state 78
     LE     shift, and go to state 79
-    '&'    shift, and go to state 80
-    '|'    shift, and go to state 81
-    '^'    shift, and go to state 82
-    '*'    shift, and go to state 83
-    '/'    shift, and go to state 84
-    '%'    shift, and go to state 85
-    '+'    shift, and go to state 86
-    '-'    shift, and go to state 87
-    '<'    shift, and go to state 88
-    '>'    shift, and go to state 89
+    '<'    shift, and go to state 80
+    '>'    shift, and go to state 81
+    '+'    shift, and go to state 82
+    '-'    shift, and go to state 83
+    '*'    shift, and go to state 84
+    '/'    shift, and go to state 85
+    '%'    shift, and go to state 86
+    '&'    shift, and go to state 87
+    '|'    shift, and go to state 88
+    '^'    shift, and go to state 89
     '{'    shift, and go to state 19
 
     stmtBlock  转到状态 139

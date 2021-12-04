@@ -174,17 +174,16 @@
 
     /* Precedence declarations go here. */
     /*算符优先级声明*/
-    %left '~' '&' '|' '^'
-    %left '*' '/'
-    %left '%'
-    %left '+' '-'
-    %nonassoc UMINUS '!'
-	  %nonassoc '=' 
-    %nonassoc EQUAL NE
-    %nonassoc '<' LE GE '>'
+    %nonassoc '=' 
     %right OR
     %right AND
-
+    %nonassoc EQUAL NE
+    %nonassoc '<' LE GE '>'
+    %left '+' '-'
+    %left '*' '/' '%'
+    %nonassoc UMINUS '!'
+    %left '~' '&' '|' '^'    
+    
 
 %%
 
