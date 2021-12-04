@@ -199,7 +199,7 @@
 
     // add more syntax rules here
     /*Decl->VariableDecl|CallDecl*/
-    decl  : variableDecl{
+    decl: variableDecl{
       $$ =  $1;
     }
     |  callDecl{
@@ -207,19 +207,19 @@
     };
   
     /*decl_list*/
-    decl_list   :decl {
+    decl_list: decl {
       $$ = single_Decls($1);
     }
     |  decl_list decl {
       $$ = append_Decls($1, single_Decls($2));
     };
     
-    /*variableDecl->var variable;*/
-    variableDecl  : VAR variable ';'{
-      $$ = variableDecl($2);
+    /*variableDecl->variable;*/
+    variableDecl: variable ';'{
+      $$ = variableDecl($1);
     };
 
-    variableDecl_list  : variableDecl{
+    variableDecl_list: variableDecl{
       $$ = single_VariableDecls($1);
     }
     |  variableDecl_list variableDecl {
