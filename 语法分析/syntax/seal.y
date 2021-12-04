@@ -223,7 +223,7 @@
       $$ = single_VariableDecls($1);
     }
     |  variableDecl_list variableDecl {
-      $$ = append_Variables($1, single_VariableDecls($2));
+      $$ = append_VariableDecls($1, single_VariableDecls($2));
     };
 
     /*variable->TYPEID OBJECTID*/
@@ -232,8 +232,8 @@
     };
 
     /*variable_list*/
-    variable_list:  {
-      $$ = nil_Variables();
+    variable_list:  variable {
+      $$ = single_Variables($1);
     }
     |  variable_list ',' variable {
       $$ = append_Variables($1, single_Variables($3));
