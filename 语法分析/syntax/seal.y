@@ -192,6 +192,7 @@
 
     /* Save the root of the abstract syntax tree in a global variable. */
 	/* Add more rules here */
+    /*Program->[Decl]+ */
     program		: decl_list {
         @$ = @1;
         ast_root = program($1); 
@@ -199,6 +200,109 @@
       ;
 
     // add more syntax rules here
+    /*Decl->VariableDecl|CallDecl*/
+    decl  : variableDecl{
+      $$ =  $1;
+    }
+    |  callDecl{
+      $$ = $1;
+    };
+  
+    /*decl_list*/
+    decl_list   :decl {
+      $$ = single_Decls($1);
+    }
+    |  decl_list decl {
+      $$ = append_Decls($1, single_Decls($2));
+    };
+    
+    /*variableDecl->var variable;*/
+    variableDecl  : VAR variable ';'{
+      $$ = variableDecl($2);
+    };
+
+    variableDecl_list  : variableDecl{
+      $$ = single_VariableDecls($1);
+    }
+    |  variableDecl_list variableDecl {
+      $$ = append_Variables($1, single_VariableDecls($2));
+    };
+
+    /*variable->TYPEID OBJECTID*/
+    variable:  TYPEID OBJECTID {
+      $$ = variable($1, $2);
+    };
+
+    /*variable_list*/
+    variable_list:  {
+      $$ = single_Variables($1);
+    }
+    |  variable_list ',' variable {
+      $$ = append_Variables($1, single_Variables($3));
+    };
+
+    /*CallDecl->TYPEID func object([Variable[[,Variable]]*]) StmtBlock*/
+    callDecl:  TYPEID FUNC OBJECTID '(' variable_list ')' stmtBlock{
+      $$ = callDecl($3, $5, $1, $7);
+    };
+    |  TYPEID FUNC OBJECTID '('  ')' stmtBlock{
+      $$ = callDecl($3, nil_Variables(), $1, $7);
+    };
+
+    /*stmtBlock->{variableDecl* stmt*} */
+    stmtBlock:  '{' variableDecl_list stmt_list '}' {
+      $$ = stmtBlock($2, $3);
+    }
+    | '{' stmt_list '}' {
+      $$ = stmtBlock(nil_VariableDecls(), $2);
+    }
+    | '{' variableDecl_list '}'{
+      $$ = stmtBlock($2, nil_Stmts());
+    }
+    | '{' '}' {
+      $$ = stmtBlock(nil_VariableDecls(), nil_Stmts())
+    };
+
+    /*stmt->;|Expr;|IfStmt|WhileStmt|ForStmt|BreakStmt|ContinueStmt|returnStmt|stmtBlock*/
+    stmt: ';' {
+      $$ = no_expr();
+    }
+    | expr ';' {
+      $$ = $1;
+    }
+    | ifStmt {
+      $$ = $1;
+    }
+    | whileStmt{
+      $$ = $1;
+    }
+    | forStmt{
+      $$ = $1;
+    }
+    | breakStmt{
+      $$ = $1;
+    }
+    | continueStmt{
+      $$ = $1;
+    }
+    | returnStmt{
+      $$ = $1;
+    }
+    | stmtBlock{
+      $$ = $1;
+    };
+
+    /*stmt_list*/
+    stmt_list {
+      $$ = single_Stmts($1);
+    }
+    | stmt_list {
+      $$ = append_Stmts($1, single_Stmts($2));
+    };
+
+    /**/
+
+
     
     /* end of grammar */
 %%
