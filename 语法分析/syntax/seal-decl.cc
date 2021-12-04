@@ -20,7 +20,7 @@ void VariableDecl_class::dump(ostream& stream, int n)
 
 Variable Variable_class::copy_Variable()
 {
-   return new Variable_class(copy_Symbol(name), copy_Symbol(type));
+   return new Variable_class(copy_Symbol(type), copy_Symbol(name));
 }
 
 
