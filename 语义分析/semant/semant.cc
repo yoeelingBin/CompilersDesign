@@ -19,15 +19,17 @@ typedef std::map<Symbol, Symbol> CallTable;
 typedef std::map<Symbol, Symbol> GloabalVars;
 typedef std::map<Symbol, Symbol> LocalVars;
 typedef std::map<Symbol, bool> InstallTable;
-typedef std::vector<Symbol> Para;
-typedef std::map<Symbol, Para> ParaTable;
+typedef std::map<Symbol, Symbol> ParaVars;
+typedef std::vector<Symbol> FuncPara;
+typedef std::map<Symbol, FuncPara> FuncParaTable;
 
 // Maps instantiation:
 CallTable callTable;
 GloabalVars globalVars;
 LocalVars localVars;
 InstallTable installTable;
-ParaTable paraTable;
+ParaVars paraVars;
+FuncParaTable funcParaTable;
 
 ///////////////////////////////////////////////
 // helper func
@@ -126,8 +128,8 @@ static void install_calls(Decls decls) {
             }
             // update tables
             callTable[name] = type;
-            installTable[name] = false;
-            tmp_decl->check();
+            // installTable[name] = false;
+            tmp_decl->checkPara();
         }
     }
 }
@@ -142,13 +144,9 @@ static void install_globalVars(Decls decls) {
                 // global variable can't be named twice
                 semant_error(tmp_decl) << "Global variable redefined." << endl;
             }
-            else if (!isValidCallName(name)) {
-                // variable name can't be print
-                semant_error(tmp_decl) << "Variable cannot have a name as printf." << endl;
-            }
             else if (!isValidTypeName(type)) {
                 // variable type can't be Void
-                semant_error(tmp_decl) << "Var "<< name << " cannot be Void type. Void can just be used as return type." << endl;
+                semant_error(tmp_decl) << "variable "<< name << " cannot be Void type. Void can just be used as return type." << endl;
             }
             globalVars[name] = type;
         }
@@ -156,19 +154,113 @@ static void install_globalVars(Decls decls) {
 }
 
 static void check_calls(Decls decls) {
-
+    objectEnv.enterscope();
+    for (int i=decls->first(); decls->more(i); i=decls->next(i)) {
+        Decl tmp_decl = decls->nth(i);
+        if (tmp_decl->isCallDecl()) {
+            tmp_decl->check();
+            localVars.clear();
+            paraVars.clear();
+        }
+    }
+    objectEnv.exitscope();
 }
 
 static void check_main() {
-
+    if (callTable[main] == NULL) {
+        // has main or not
+        semant_error() << "Main function is not defined." << endl;
+    }
+    CallDecl main = static_cast<CallDecl>(callTable[main]);
+    if (main->getVariables()->len() != 0) {
+        // main has no parameters
+        semant_error(callTable[main]) << "Main function should not have any parameters." << endl;
+    }
+    else if (main->getType() != Void) {
+        // main return Void
+        semant_error(callTable[main]) << "Main function should have return type Void." << endl;
+    }
 }
 
 void VariableDecl_class::check() {
-
+    Symbol name = this->getName();
+    Symbol type = this->getType();
+    if (!isValidTypeName(type)) {
+        semant_error(this) << "variable " << name << " cannot be of type Void. Void can just be used as return type." << endl;
+    }
+    else if (localVars[name] != NULL) {
+        semant_error(this) <<"variable" << name << " was previously defined." << endl;
+    }
+    localVars[name] = type;
+    objectEnv.addid(name, new Symbol(type));
 }
 
-void CallDecl_class::check() {
+void CallDecl_class::checkPara() {
+    Symbol name = this->getName();
+    Variables paras = this->getVariables();
+    Symbol returnType = this->getType();
+    StmtBlock body = this->getBody();
 
+    FuncPara funcPara;
+    for (int i=paras->first(); paras->more(i); i=paras->next(i)) {
+        Variable tmp_para = paras->nth(i);
+        Symbol paraName = tmp_para->getName();
+        Symbol paraType = tmp_para->getType();
+        funcPara.push_back(paraType);
+    }
+    funcParaTable[name] = funcPara;
+}
+
+void CallDecl_class::check() { 
+    Symbol name = this->getName();
+    Variables paras = this->getVariables();
+    Symbol returnType = this->getType();
+    StmtBlock body = this->getBody();
+
+    objectEnv.enterscope();
+    
+    if (paras->len() > 6) {
+    // func has more than 6 parameters
+    semant_error(this) << "Function " << name << " has more than 6 parameters." << endl;
+    }
+
+    for (int i=paras->first(); paras->more(i); paras->next(i)) {
+        Variable tmp_para = paras->nth(i);
+        Symbol paraName = tmp_para->getName();
+        Symbol paraType = tmp_para->getType();
+        bool flag1 = true, flag2 = true;
+
+        if(!isValidTypeName(paraType)) {
+            // morphological parameters type can't be Void
+            semant_error(this) << "Function " << name << " 's parameter has an invalid type Void." <<endl;
+            flag1 = false;
+        }
+        else if (objectEnv.lookup(paraName) != NULL) {
+            semant_error(this) << "Function " << name << " 's parameter has a duplicate name " << paraName << endl;
+            flag2 = false;
+        }
+        if (flag1 && flag2) {
+            objectEnv.addid(paraName, new Symbol(paraType));
+            paraVars[paraName] = paraType;
+        }
+    }
+    // check variableDecls
+    VariableDecls varDecls = body->getVariableDecls();
+    for (int i=varDecls->first(); varDecls->more(i); i=varDecls->next(i)) {
+        varDecls->nth(i)->check();
+    }
+    // check return
+    bool hasReturn = false;
+    Stmts stmts = body->getStmts();
+    for (int i=stmts->first(); stmts->more(i); i=stmts->next(i)) {
+        hasReturn |= stmts->nth(i)->isReturn();
+        if (hasReturn) break; 
+    }
+    if (!hasReturn) {
+        semant_error(this) << "Function " << name << " must have an overall return statement." << endl;
+    }
+    
+    objectEnv.exitscope();
 }
 
 void StmtBlock_class::check(Symbol type) {
