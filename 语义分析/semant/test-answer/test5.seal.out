@@ -1,0 +1,169 @@
+#4
+Program
+  #4
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #4
+    Statement Block
+      (variable declarations)
+      (
+      #5
+      Variable Declaration
+        #5
+        Variable
+          (name)
+          c
+          (type)
+          Int
+      )
+      (statements)
+      (
+      #6
+      Assign
+        (left value)
+        c
+        (right value)
+        #6
+        Call
+          (name)
+          equal
+          (actual parameters)
+          (
+          #6
+          Actual
+            (expr)
+            #6
+            Const_int
+              (name)
+              2
+              (type)
+            : Int
+            (type)
+          : Int
+          #6
+          Actual
+            (expr)
+            #6
+            Const_int
+              (name)
+              3
+              (type)
+            : Int
+            (type)
+          : Int
+          )
+          (type)
+        : Int
+        (type)
+      : Int
+      #7
+      ReturnStmt
+        (return value)
+        #7
+        No_expr
+      )
+  #9
+  Call Declaration
+    (name)
+    equal
+    (parameters)
+    (
+    #9
+    Variable
+      (name)
+      a
+      (type)
+      Int
+    #9
+    Variable
+      (name)
+      b
+      (type)
+      Int
+    )
+    (return type)
+    Int
+    (body)
+    #9
+    Statement Block
+      (variable declarations)
+      (
+      )
+      (statements)
+      (
+      #10
+      IfStmt
+        (condition)
+        #10
+        !=
+          (OP left)
+          #10
+          Object
+            (name)
+            a
+            (type)
+          : Int
+          (OP right)
+          #10
+          Object
+            (name)
+            b
+            (type)
+          : Int
+          (type)
+        (then)
+        #10
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #11
+          ReturnStmt
+            (return value)
+            #11
+            +
+              (OP left)
+              #11
+              Object
+                (name)
+                a
+                (type)
+              : Int
+              (OP right)
+              #11
+              Object
+                (name)
+                b
+                (type)
+              : Int
+              (type)
+            : Int
+          )
+        (else)
+        #10
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          )
+      #13
+      ReturnStmt
+        (return value)
+        #13
+        Object
+          (name)
+          a
+          (type)
+        : Int
+      )

@@ -1,0 +1,21 @@
+/* 
+this a false simple example of SEAL 
+"20: object c has not been defined."
+*/
+Float func max(Float x ,Float y){
+	if x>y{
+        	return x;
+	}
+	return y;
+}
+
+Void func main(){
+	Float a;
+	Float b;
+	Float max_num;
+
+	a=22.2;
+	b=33.3;
+	max_num=max(a,b);
+	return c;
+}

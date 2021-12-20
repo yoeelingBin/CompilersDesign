@@ -1,0 +1,9 @@
+/* 
+this a correct example of SEAL 
+*/
+Void func main() {
+	Int x;
+	x=10;
+	x=x+1;
+	return;
+}

@@ -1,0 +1,18 @@
+/* 
+this a correct example of SEAL 
+*/
+Void func main() {
+	Bool a;
+	Bool b;
+	Bool c;
+	Bool d;
+	Bool e;
+	a=true;
+	b=false;
+	c=true;
+	d=false;
+	if a && b && c && d != true{
+    	e=false;
+	}
+	return;
+}

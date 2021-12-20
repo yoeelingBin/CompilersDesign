@@ -1,0 +1,201 @@
+#4
+Program
+  #4
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #4
+    Statement Block
+      (variable declarations)
+      (
+      #5
+      Variable Declaration
+        #5
+        Variable
+          (name)
+          a
+          (type)
+          Bool
+      #6
+      Variable Declaration
+        #6
+        Variable
+          (name)
+          b
+          (type)
+          Bool
+      #7
+      Variable Declaration
+        #7
+        Variable
+          (name)
+          c
+          (type)
+          Bool
+      #8
+      Variable Declaration
+        #8
+        Variable
+          (name)
+          d
+          (type)
+          Bool
+      #9
+      Variable Declaration
+        #9
+        Variable
+          (name)
+          e
+          (type)
+          Bool
+      )
+      (statements)
+      (
+      #10
+      Assign
+        (left value)
+        a
+        (right value)
+        #10
+        Const_bool
+          (name)
+          1
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #11
+      Assign
+        (left value)
+        b
+        (right value)
+        #11
+        Const_bool
+          (name)
+          0
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #12
+      Assign
+        (left value)
+        c
+        (right value)
+        #12
+        Const_bool
+          (name)
+          1
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #13
+      Assign
+        (left value)
+        d
+        (right value)
+        #13
+        Const_bool
+          (name)
+          0
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #14
+      IfStmt
+        (condition)
+        #14
+        &&
+          (OP left)
+          #14
+          Object
+            (name)
+            a
+            (type)
+          : Bool
+          (OP right)
+          #14
+          &&
+            (OP left)
+            #14
+            Object
+              (name)
+              b
+              (type)
+            : Bool
+            (OP right)
+            #14
+            &&
+              (OP left)
+              #14
+              Object
+                (name)
+                c
+                (type)
+              : Bool
+              (OP right)
+              #14
+              !=
+                (OP left)
+                #14
+                Object
+                  (name)
+                  d
+                  (type)
+                : Bool
+                (OP right)
+                #14
+                Const_bool
+                  (name)
+                  1
+                  (type)
+                : Bool
+                (type)
+              (type)
+            (type)
+          (type)
+        (then)
+        #14
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #15
+          Assign
+            (left value)
+            e
+            (right value)
+            #15
+            Const_bool
+              (name)
+              0
+              (type)
+            : Bool
+            (type)
+          : Bool
+          )
+        (else)
+        #14
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          )
+      #17
+      ReturnStmt
+        (return value)
+        #17
+        No_expr
+      )
