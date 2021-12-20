@@ -14,6 +14,21 @@ static Decl curr_decl = 0;
 typedef SymbolTable<Symbol, Symbol> ObjectEnvironment; // name, type
 ObjectEnvironment objectEnv;
 
+// Maps Defination:
+typedef std::map<Symbol, Symbol> CallTable;
+typedef std::map<Symbol, Symbol> GloabalVars;
+typedef std::map<Symbol, Symbol> LocalVars;
+typedef std::map<Symbol, bool> InstallTable;
+typedef std::vector<Symbol> Para;
+typedef std::map<Symbol, Para> ParaTable;
+
+// Maps instantiation:
+CallTable callTable;
+GloabalVars globalVars;
+LocalVars localVars;
+InstallTable installTable;
+ParaTable paraTable;
+
 ///////////////////////////////////////////////
 // helper func
 ///////////////////////////////////////////////
