@@ -107,7 +107,29 @@ static bool sameType(Symbol name1, Symbol name2) {
 }
 
 static void install_calls(Decls decls) {
-
+    for (int i=decls->first(); decls->more(i); i=decls->next(i)){
+        Decl tmp_decl = decls->nth(i);
+        Symbol name = tmp_decl->getName();
+        Symbol type = tmp_decl->getType();
+        if (tmp_decl->isCallDecl()){
+            if (callTable[name] != NULL) {
+                // no repeat function declaration
+                semant_error(tmp_decl) << "Function " << name << " has been previously defined." << endl;
+            }
+            else if (!isValidCallName(name)) {
+                // function printf can't be defined twice
+                semant_error(tmp_decl) << "Function printf cannot have a name as printf." << endl;
+            }
+            else if (type != Bool && type != Int && type != String && type !=  Float && type != Void) {
+                // return type must be int,void,string,float,bool
+                semant_error(tmp_decl) << "Function returnType error." << endl;
+            }
+            // update tables
+            callTable[name] = type;
+            installTable[name] = false;
+            tmp_decl->check();
+        }
+    }
 }
 
 static void install_globalVars(Decls decls) {
