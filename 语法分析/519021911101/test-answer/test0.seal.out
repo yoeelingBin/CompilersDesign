@@ -1,0 +1,52 @@
+#6
+Program
+  #6
+  Call Declaration
+    (name)
+    zhanzhuanxiangchu
+    (parameters)
+    (
+    #6
+    Variable
+      (type)
+      Int
+      (name)
+      a
+    #6
+    Variable
+      (type)
+      Int
+      (name)
+      b
+    )
+    (return type)
+    Int
+    (body)
+    #6
+    Statement Block
+      (variable declarations)
+      (
+      )
+      (statements)
+      (
+      #7
+      ForStmt
+        (init)
+        #7
+        No_expr
+        (condition)
+        #7
+        No_expr
+        (loop)
+        #7
+        No_expr
+        (body)
+        #7
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          )
+      )

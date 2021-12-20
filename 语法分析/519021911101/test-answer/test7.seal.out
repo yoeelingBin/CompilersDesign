@@ -1,0 +1,79 @@
+#1
+Program
+  #1
+  Variable Declaration
+    #1
+    Variable
+      (type)
+      Int
+      (name)
+      a
+  #3
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #3
+    Statement Block
+      (variable declarations)
+      (
+      #4
+      Variable Declaration
+        #4
+        Variable
+          (type)
+          Int
+          (name)
+          x
+      )
+      (statements)
+      (
+      #5
+      Assign
+        (left value)
+        x
+        (right value)
+        #5
+        Call
+          (name)
+          getA
+          (actual parameters)
+          (
+          )
+          (type)
+        : _no_type
+        (type)
+      : _no_type
+      )
+  #8
+  Call Declaration
+    (name)
+    getA
+    (parameters)
+    (
+    )
+    (return type)
+    Int
+    (body)
+    #8
+    Statement Block
+      (variable declarations)
+      (
+      )
+      (statements)
+      (
+      #9
+      ReturnStmt
+        (return value)
+        #9
+        Object
+          (type)
+        : _no_type
+          (name)
+          a
+      )

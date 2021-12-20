@@ -1,0 +1,21 @@
+Float func loop(Bool a,Float b) {
+    while a{
+        b=b+1;
+        if b>=99999.9{
+            a=false;
+        }
+    }
+    return b;
+}
+
+Void func main() { 
+
+    Bool a;
+    Float b;
+    Float result;
+
+    a=true;
+    b=2.0;
+
+    c=loop(a,b);
+}

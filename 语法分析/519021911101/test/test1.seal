@@ -1,0 +1,6 @@
+/*  just have var declarations */
+
+Int a;
+Bool b;
+String c;
+Float d;

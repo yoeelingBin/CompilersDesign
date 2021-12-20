@@ -1,0 +1,137 @@
+#1
+Program
+  #1
+  Call Declaration
+    (name)
+    add
+    (parameters)
+    (
+    #1
+    Variable
+      (type)
+      Int
+      (name)
+      x
+    )
+    (return type)
+    Int
+    (body)
+    #1
+    Statement Block
+      (variable declarations)
+      (
+      #2
+      Variable Declaration
+        #2
+        Variable
+          (type)
+          Int
+          (name)
+          sum
+      )
+      (statements)
+      (
+      #4
+      ForStmt
+        (init)
+        #4
+        Assign
+          (left value)
+          sum
+          (right value)
+          #4
+          Const_int
+            (type)
+          : _no_type
+            (name)
+            0
+          (type)
+        : _no_type
+        (condition)
+        #4
+        >
+          (OP left)
+          #4
+          Object
+            (type)
+          : _no_type
+            (name)
+            x
+          (OP right)
+          #4
+          Const_int
+            (type)
+          : _no_type
+            (name)
+            0
+          (type)
+        (loop)
+        #4
+        Assign
+          (left value)
+          x
+          (right value)
+          #4
+          -
+            (OP left)
+            #4
+            Object
+              (type)
+            : _no_type
+              (name)
+              x
+            (OP right)
+            #4
+            Const_int
+              (type)
+            : _no_type
+              (name)
+              1
+            (type)
+          : _no_type
+          (type)
+        : _no_type
+        (body)
+        #4
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #5
+          Assign
+            (left value)
+            sum
+            (right value)
+            #5
+            +
+              (OP left)
+              #5
+              Object
+                (type)
+              : _no_type
+                (name)
+                sum
+              (OP right)
+              #5
+              Object
+                (type)
+              : _no_type
+                (name)
+                x
+              (type)
+            : _no_type
+            (type)
+          : _no_type
+          )
+      #7
+      ReturnStmt
+        (return value)
+        #7
+        Object
+          (type)
+        : _no_type
+          (name)
+          sum
+      )

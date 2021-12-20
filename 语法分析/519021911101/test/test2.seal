@@ -1,0 +1,7 @@
+Void func main() {
+    Int a;
+    Bool b ;
+    String c;
+    Float d;
+    printf("hahaha!");
+}

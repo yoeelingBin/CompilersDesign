@@ -1,0 +1,72 @@
+#1
+Program
+  #1
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #1
+    Statement Block
+      (variable declarations)
+      (
+      #2
+      Variable Declaration
+        #2
+        Variable
+          (type)
+          Int
+          (name)
+          a
+      #3
+      Variable Declaration
+        #3
+        Variable
+          (type)
+          Bool
+          (name)
+          b
+      #4
+      Variable Declaration
+        #4
+        Variable
+          (type)
+          String
+          (name)
+          c
+      #5
+      Variable Declaration
+        #5
+        Variable
+          (type)
+          Float
+          (name)
+          d
+      )
+      (statements)
+      (
+      #6
+      Call
+        (name)
+        printf
+        (actual parameters)
+        (
+        #6
+        Actual
+          (expr)
+          #6
+          Const_string
+            (type)
+          : _no_type
+            (name)
+            hahaha!
+          (type)
+        : _no_type
+        )
+        (type)
+      : _no_type
+      )
