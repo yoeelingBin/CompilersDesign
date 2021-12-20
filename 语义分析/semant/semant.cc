@@ -133,7 +133,26 @@ static void install_calls(Decls decls) {
 }
 
 static void install_globalVars(Decls decls) {
-
+    for (int i=decls->first(); decls->more(i); i=decls->next(i)){
+        Decl tmp_decl = decls->nth(i);
+        Symbol name = tmp_decl->getName();
+        Symbol type = tmp_decl->getType();
+        if ( !tmp_decl->isCallDecl()) {
+            if (globalVars[name] != NULL){
+                // global variable can't be named twice
+                semant_error(tmp_decl) << "Global variable redefined." << endl;
+            }
+            else if (!isValidCallName(name)) {
+                // variable name can't be print
+                semant_error(tmp_decl) << "Variable cannot have a name as printf." << endl;
+            }
+            else if (!isValidTypeName(type)) {
+                // variable type can't be Void
+                semant_error(tmp_decl) << "Var "<< name << " cannot be Void type. Void can just be used as return type." << endl;
+            }
+            globalVars[name] = type;
+        }
+    }
 }
 
 static void check_calls(Decls decls) {
