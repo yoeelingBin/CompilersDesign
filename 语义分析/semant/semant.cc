@@ -11,26 +11,27 @@ static ostream& error_stream = cerr;
 static int semant_errors = 0;
 static Decl curr_decl = 0;
 static bool has_return = 0;
+static int in_loop = 0;
 
 typedef SymbolTable<Symbol, Symbol> ObjectEnvironment; // name, type
 ObjectEnvironment objectEnv;
 
 // Maps Defination:
 typedef std::map<Symbol, CallDecl> CallTable;
-typedef std::map<Symbol, Symbol> GloabalVars;
-typedef std::map<Symbol, Symbol> LocalVars;
-typedef std::map<Symbol, bool> InstallTable;
-typedef std::map<Symbol, Symbol> ParaVars;
-typedef std::vector<Symbol> FuncPara;
-typedef std::map<Symbol, FuncPara> FuncParaTable;
+//typedef std::map<Symbol, Symbol> GloabalVars;
+//typedef std::map<Symbol, Symbol> LocalVars;
+//typedef std::map<Symbol, bool> InstallTable;
+//typedef std::map<Symbol, Symbol> ParaVars;
+//typedef std::vector<Symbol> FuncPara;
+//typedef std::map<Symbol, FuncPara> FuncParaTable;
 
 // Maps instantiation:
 CallTable callTable;
-GloabalVars globalVars;
-LocalVars localVars;
-InstallTable installTable;
-ParaVars paraVars;
-FuncParaTable funcParaTable;
+//GloabalVars globalVars;
+//LocalVars localVars;
+//InstallTable installTable;
+//ParaVars paraVars;
+//FuncParaTable funcParaTable;
 
 ///////////////////////////////////////////////
 // helper func
@@ -209,7 +210,6 @@ void CallDecl_class::check() {
     objectEnv.enterscope();
 
     Variables paras = this->getVariables();
-    Symbol returnType = this->getType();
     StmtBlock body = this->getBody();
 
     if (paras->len() > 6) {
@@ -233,7 +233,9 @@ void CallDecl_class::check() {
             objectEnv.addid(paraName, new Symbol(this->getType()));
         }
     }
+    // not sure here
     body->check(getType());
+
     objectEnv.exitscope();
     if (!has_return) {
         semant_error(this) << "Function " << this->getName() << " must have an overall return statement." << endl;
@@ -243,15 +245,48 @@ void CallDecl_class::check() {
 }
 
 void StmtBlock_class::check(Symbol type) {
+    objectEnv.enterscope();
+    VariableDecls localVarDecls = this->getVariableDecls();
+    for (int i=localVarDecls->first(); localVarDecls->more(i); i=localVarDecls->next(i)) {
+        VariableDecl localVarDecl = localVarDecls->nth(i);
+        localVarDecl->check();
+    }
 
+    Stmts localStmts = this->getStmts();
+    for (int i=localStmts->first(); localStmts->more(i); i=localStmts->next(i)) {
+        Stmt localStmt = localStmts->nth(i);
+        localStmt->check(type);
+    }
+    objectEnv.exitscope();
 }
 
 void IfStmt_class::check(Symbol type) {
+    Expr condition = this->getCondition();
+    Symbol condType = condition->checkType();
 
+    if (condType != Bool) {
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+    }
+
+    StmtBlock thenExpr = this->getThen();
+    StmtBlock elseExpr = this->getElse();
+
+    thenExpr->check(type);
+    elseExpr->check(type);
 }
 
 void WhileStmt_class::check(Symbol type) {
+    in_loop++;
+    Expr condition = this->getCondition();
+    Symbol condType = condition->checkType();
 
+    if (condType != Bool) {
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+    }
+
+    StmtBlock body = this->getBody();
+    body->check(type);
+    in_loop--;
 }
 
 void ForStmt_class::check(Symbol type) {
