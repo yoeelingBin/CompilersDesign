@@ -9,8 +9,10 @@ extern char *curr_filename;
 
 static ostream& error_stream = cerr;
 static int semant_errors = 0;
+
+std::stack<bool> has_return;
 static Decl curr_decl = 0;
-static bool has_return = 0;
+static bool has_return_bool = 0;
 static int in_loop = 0;
 
 typedef SymbolTable<Symbol, Symbol> ObjectEnvironment; // name, type
@@ -237,7 +239,7 @@ void CallDecl_class::check() {
     body->check(getType());
 
     objectEnv.exitscope();
-    if (!has_return) {
+    if (!has_return_bool) {
         semant_error(this) << "Function " << this->getName() << " must have an overall return statement." << endl;
     }
     
@@ -246,6 +248,7 @@ void CallDecl_class::check() {
 
 void StmtBlock_class::check(Symbol type) {
     objectEnv.enterscope();
+    has_return.push(1);
     VariableDecls localVarDecls = this->getVariableDecls();
     for (int i=localVarDecls->first(); localVarDecls->more(i); i=localVarDecls->next(i)) {
         VariableDecl localVarDecl = localVarDecls->nth(i);
@@ -257,10 +260,12 @@ void StmtBlock_class::check(Symbol type) {
         Stmt localStmt = localStmts->nth(i);
         localStmt->check(type);
     }
+    has_return.pop();
     objectEnv.exitscope();
 }
 
 void IfStmt_class::check(Symbol type) {
+    has_return.push(1);
     Expr condition = this->getCondition();
     Symbol condType = condition->checkType();
 
@@ -273,9 +278,11 @@ void IfStmt_class::check(Symbol type) {
 
     thenExpr->check(type);
     elseExpr->check(type);
+    has_return.pop();
 }
 
 void WhileStmt_class::check(Symbol type) {
+    has_return.push(1);
     in_loop++;
     Expr condition = this->getCondition();
     Symbol condType = condition->checkType();
@@ -287,62 +294,249 @@ void WhileStmt_class::check(Symbol type) {
     StmtBlock body = this->getBody();
     body->check(type);
     in_loop--;
+    has_return.pop();
 }
 
 void ForStmt_class::check(Symbol type) {
+    has_return.push(1);
+    in_loop++;
+    Expr init = this->getInit();
+    Expr loop = this->getLoop();
+    Expr condition = this->getCondition();
 
+    init->checkType();
+    loop->checkType();
+    Symbol condType = condition->checkType();
+
+    if(condType != Bool && !condition->is_empty_Expr()) {
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+    }
+
+    StmtBlock body = this->getBody();
+    body->check(type);
+    in_loop--;
+    has_return.pop();
 }
 
 void ReturnStmt_class::check(Symbol type) {
+    if (has_return.size() == 1){
+        has_return_bool = 1;
+    }
 
+    Expr value = this->getValue();
+    Symbol thisType = value->checkType();
+
+    if (thisType != type) {
+        semant_error(this) << "Returns " << thisType << " , but need " << type << endl;
+    }
 }
 
 void ContinueStmt_class::check(Symbol type) {
-
+    if (in_loop == 0) {
+        semant_error(this) << "continue must be used in a loop sentence." << endl;
+    }
 }
 
 void BreakStmt_class::check(Symbol type) {
-
+    if (in_loop == 0) {
+        semant_error(this) << "break must be used in a loop sentence." << endl;
+    }
 }
 
 Symbol Call_class::checkType(){
+    Symbol callName = this->getName();
+    Actuals actuals = this->getActuals();
+    Symbol result;
 
+    if (!isValidCallName(callName)) {
+        if (actuals->len()) {
+            if (sameType(actuals->nth(actuals->first())->checkType(), String)) {
+                for (int i=actuals->next(actuals->first()); actuals->more(i); i=actuals->next(i)) {
+                    Symbol actualType = actuals->nth(i)->checkType();
+                }
+                setType(this, Void);
+                result = Void;
+            }
+            else {
+                semant_error(this) << "printf()'s first parameter must be of type String." << endl;
+                result = Void;
+            }
+        }
+        else {
+            semant_error(this) << "printf() must has at last one parameter of type String." << endl;
+        }
+    }
+    else {
+        if (callTable.find(callName) == callTable.end()) {
+            semant_error(this) << "Function " << callName << " has not been defined." << endl;
+            setType(Void);
+            result = Void;
+        }
+        else {
+            CallDecl call = CallTable[callName];
+            Variables formals = call->getVariables();
+            bool typeWrong = 0;
+            int k = actuals->first();
+            for (int i=formals->first(); formals->more(i); i=formals->next(i)) {
+                if (!actuals->more(k)) {
+                    semant_error(this) << "Function " << callName << " called with wrong number of arguments." << endl;
+                    break;
+                }
+                Symbol actualType = actuals->nth(k)->checkType();
+                Symbol formalType = formals->nth(i)->getType();
+                if (actualType != formalType) {
+                    semant_error(this) << "Function " << callName << ", the " << k+1 << " parameter should be " << formalType << " but provided a " << actualType << endl;
+                    typeWrong = 1;
+                    break;
+                }
+                k = actuals->next(k);
+            }
+            if (!typeWrong && actuals->more(k)) {
+                semant_error(this) << "Function " << callName << " called with wrong number of arguments." << endl;
+            }
+            Symbol callType = call->getType();
+            setType(callType)
+            result = callType;
+        }
+    }
+    return result;
 }
 
 Symbol Actual_class::checkType(){
-
+    Symbol type = this->expr->checkType();
+    setType(type);
+    return type;
 }
 
 Symbol Assign_class::checkType(){
-
+    Symbol expectType = *objectEnv.lookup(this->lvalue);
+    Symbol result;
+    if (expectType) {
+        Symbol actualType = this->value->checkType();
+        if (sameType(actualType, expectType)) {
+            setType(expectType);
+        }
+        else if (sameType(expectType, Float) && sameType(actualType,Int)) {
+            setType(Float);
+        }
+        else {
+            semant_error(this) << "Right value must have type " << expectType << " , got " << actualType << endl;
+        }
+        result = this->type;
+    }
+    else {
+        semant_error(this) << "Left value " << this->lvalue << " has not been defined." << endl;
+        result = Void;
+    }
+    return result;
 }
 
 Symbol Add_class::checkType(){
- 
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
+
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else if (sameType(leftType, Float) && sameType(rightType, Float) || sameType(leftType, Float) && sameType(rightType, Int) || sameType(leftType, Int) && sameType(rightType, Float)) {
+        setType(Float);
+    }
+    else {
+        semant_error(this) << "Cannot add a " << leftType << " and a " << rightType << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Minus_class::checkType(){
- 
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
+
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else if (sameType(leftType, Float) && sameType(rightType, Float) || sameType(leftType, Float) && sameType(rightType, Int) || sameType(leftType, Int) && sameType(rightType, Float)) {
+        setType(Float);
+    }
+    else {
+        semant_error(this) << "Cannot minus a " << leftType << " by a " << rightType << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Multi_class::checkType(){
- 
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
+
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else if (sameType(leftType, Float) && sameType(rightType, Float) || sameType(leftType, Float) && sameType(rightType, Int) || sameType(leftType, Int) && sameType(rightType, Float)) {
+        setType(Float);
+    }
+    else {
+        semant_error(this) << "Cannot multiply a " << leftType << " with a " << rightType << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Divide_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else if (sameType(leftType, Float) && sameType(rightType, Float) || sameType(leftType, Float) && sameType(rightType, Int) || sameType(leftType, Int) && sameType(rightType, Float)) {
+        setType(Float);
+    }
+    else {
+        semant_error(this) << "Cannot divide a " << leftType << " by a " << rightType << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Mod_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else {
+        semant_error(this) << "Cannot mod a " << leftType << " and a " << rightType << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Neg_class::checkType(){
+    Symbol leftType = this->e1->checkType();
 
+    if (sameType(leftType, Int) || sameType(leftType, Float)) {
+        setType(leftType);
+    }
+    else {
+        semant_error(this) << "A " << leftType << " doesn't have a negative." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Lt_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(less)." <<endl;
+    }
+    return this->type;
 }
 
 Symbol Le_class::checkType(){

@@ -1,13 +1,11 @@
 Void func main(){
     Int a;
+    Bool b;
+    a<b;
     return;
 }
 
 Int func buggy(Int a, Int b, Int c, Int d, Int e){
-    Int flag;
-    if (flag) {
-
-    }
     return 0;
 }
 
