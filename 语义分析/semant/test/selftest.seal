@@ -4,5 +4,9 @@ Void func main(){
 }
 
 Int func buggy(Int a, Int b, Int c, Int d, Int e){
-    
+    return 0;
+}
+
+Void func printf(){
+    return;
 }
