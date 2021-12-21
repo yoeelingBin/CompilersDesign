@@ -133,21 +133,8 @@ static void install_globalVars(Decls decls) {
     objectEnv.enterscope();
     for (int i=decls->first(); decls->more(i); i=decls->next(i)){
         Decl tmp_decl = decls->nth(i);
-        Symbol name = tmp_decl->getName();
-        Symbol type = tmp_decl->getType();
-        if ( !tmp_decl->isCallDecl()) {
-            VariableDecl variableDecl = static_cast<VariableDecl>(tmp_decl);
-            if (objectEnv.lookup(name) != NULL){
-                // global variable can't be named twice
-                semant_error(tmp_decl) << "Global variable redefined." << endl;
-            }
-            else if (!isValidTypeName(type)) {
-                // variable type can't be Void
-                semant_error(tmp_decl) << "variable "<< name << " cannot be Void type. Void can just be used as return type." << endl;
-            }
-            else {
-                objectEnv.addid(name, new Symbol(variableDecl->getType()));
-            }
+        if (!tmp_decl->isCallDecl()) {
+            tmp_decl->check();
         }
     }
 }
@@ -169,7 +156,7 @@ static void check_main() {
     else {
         curr_decl = callTable[Main];
         CallDecl main = static_cast<CallDecl>(curr_decl);
-        if (main->getVariables()->len() != 0) {
+        if (main->getVariables()->len() > 0) {
             // main has no parameters
             semant_error(curr_decl) << "Main function should not have any parameters." << endl;
         }
@@ -311,7 +298,7 @@ void ReturnStmt_class::check(Symbol type) {
     Symbol thisType = value->checkType();
 
     if (thisType != type) {
-        semant_error(this) << "Returns " << thisType << " , but need " << type << '.' <<endl;
+        semant_error(this) << "Returns " << thisType << " , but need " << type << endl;
     }
 }
 
@@ -393,18 +380,18 @@ Symbol Actual_class::checkType(){
 }
 
 Symbol Assign_class::checkType(){
-    Symbol expectType = *objectEnv.lookup(this->lvalue);
+    Symbol *expectType = objectEnv.lookup(this->lvalue);
     Symbol result;
     if (expectType) {
         Symbol actualType = this->value->checkType();
-        if (sameType(actualType, expectType)) {
-            setType(expectType);
+        if (sameType(actualType, *expectType)) {
+            setType(*expectType);
         }
-        else if (sameType(expectType, Float) && sameType(actualType,Int)) {
+        else if (sameType(*expectType, Float) && sameType(actualType,Int)) {
             setType(Float);
         }
         else {
-            semant_error(this) << "Right value must have type " << expectType << " , got " << actualType << '.' <<endl;
+            semant_error(this) << "Right value must have type " << *expectType << " , got " << actualType << '.' <<endl;
         }
         result = this->type;
     }
@@ -711,15 +698,15 @@ Symbol Const_bool_class::checkType(){
 }
 
 Symbol Object_class::checkType(){
-    Symbol expectType = *objectEnv.lookup(this->var);
+    Symbol *expectType = objectEnv.lookup(this->var);
     if (expectType) {
-        setType(expectType);
+        setType(*expectType);
     }
     else {
         semant_error(this) << "object " << this->var << " has not been defined." << endl;
         setType(Void);
     }
-    return this->type;
+    return type;
 }
 
 Symbol No_expr_class::checkType(){
