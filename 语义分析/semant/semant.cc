@@ -10,30 +10,17 @@ extern char *curr_filename;
 static ostream& error_stream = cerr;
 static int semant_errors = 0;
 
-std::stack<bool> has_return;
 static Decl curr_decl = 0;
 static bool has_return_bool = 0;
 static int in_loop = 0;
+static int has_return = 0;
 
 typedef SymbolTable<Symbol, Symbol> ObjectEnvironment; // name, type
 ObjectEnvironment objectEnv;
 
-// Maps Defination:
 typedef std::map<Symbol, CallDecl> CallTable;
-//typedef std::map<Symbol, Symbol> GloabalVars;
-//typedef std::map<Symbol, Symbol> LocalVars;
-//typedef std::map<Symbol, bool> InstallTable;
-//typedef std::map<Symbol, Symbol> ParaVars;
-//typedef std::vector<Symbol> FuncPara;
-//typedef std::map<Symbol, FuncPara> FuncParaTable;
-
-// Maps instantiation:
 CallTable callTable;
-//GloabalVars globalVars;
-//LocalVars localVars;
-//InstallTable installTable;
-//ParaVars paraVars;
-//FuncParaTable funcParaTable;
+
 
 ///////////////////////////////////////////////
 // helper func
@@ -137,8 +124,6 @@ static void install_calls(Decls decls) {
             else {
                 // update tables
                 callTable[name] = call;
-                // installTable[name] = false;
-                // tmp_decl->checkPara();
             }
         }
     }
@@ -190,7 +175,7 @@ static void check_main() {
         }
         else if (main->getType() != Void) {
             // main return Void
-            semant_error(callTable[main]) << "Main function should have return type Void." << endl;
+            semant_error(curr_decl) << "Main function should have return type Void." << endl;
         }
     }
 }
@@ -198,28 +183,29 @@ static void check_main() {
 void VariableDecl_class::check() {
     Symbol name = this->getName();
     Symbol type = this->getType();
-    if (!isValidTypeName(type)) {
-        semant_error(this) << "variable " << name << " cannot be of type Void. Void can just be used as return type." << endl;
-    }
-    else if (localVars[name] != NULL) {
+    if (objectEnv.probe(name)) {
         semant_error(this) <<"variable" << name << " was previously defined." << endl;
     }
-    localVars[name] = type;
-    objectEnv.addid(name, new Symbol(type));
+    else if (!isValidTypeName(type)) {
+        semant_error(this) << "variable " << name << " cannot be of type Void. Void can just be used as return type." << endl;
+    }
+    else {
+        objectEnv.addid(name, new Symbol(type));
+    }
 }
 
 void CallDecl_class::check() {
     objectEnv.enterscope();
+    has_return_bool = 0;
 
-    Variables paras = this->getVariables();
     StmtBlock body = this->getBody();
 
-    if (paras->len() > 6) {
+    if (this->paras->len() > 6) {
     // func has more than 6 parameters
-    semant_error(this) << "Function " << name << " has more than 6 parameters." << endl;
+    semant_error(this) << "Function " << this->getName() << " has more than 6 parameters." << endl;
     }
 
-    for (int i=paras->first(); paras->more(i); paras->next(i)) {
+    for (int i=paras->first(); paras->more(i); i=paras->next(i)) {
         Variable tmp_para = paras->nth(i);
         Symbol paraName = tmp_para->getName();
         Symbol paraType = tmp_para->getType();
@@ -229,10 +215,10 @@ void CallDecl_class::check() {
             semant_error(this) << "Function " << this->getName() << " 's parameter has an invalid type Void." <<endl;
         }
         else if (objectEnv.probe(paraName)) {
-            semant_error(this) << "Function " << this->getName() << " 's parameter has a duplicate name. " << paraName << endl;
+            semant_error(this) << "Function " << this->getName() << " 's parameter has a duplicate name " << paraName << "." << endl;
         }
         else {
-            objectEnv.addid(paraName, new Symbol(this->getType()));
+            objectEnv.addid(paraName, new Symbol(paraType));
         }
     }
     // not sure here
@@ -242,13 +228,11 @@ void CallDecl_class::check() {
     if (!has_return_bool) {
         semant_error(this) << "Function " << this->getName() << " must have an overall return statement." << endl;
     }
-    
-    objectEnv.exitscope();
 }
 
 void StmtBlock_class::check(Symbol type) {
     objectEnv.enterscope();
-    has_return.push(1);
+    has_return++;
     VariableDecls localVarDecls = this->getVariableDecls();
     for (int i=localVarDecls->first(); localVarDecls->more(i); i=localVarDecls->next(i)) {
         VariableDecl localVarDecl = localVarDecls->nth(i);
@@ -260,17 +244,17 @@ void StmtBlock_class::check(Symbol type) {
         Stmt localStmt = localStmts->nth(i);
         localStmt->check(type);
     }
-    has_return.pop();
+    has_return--;
     objectEnv.exitscope();
 }
 
 void IfStmt_class::check(Symbol type) {
-    has_return.push(1);
+    has_return++;
     Expr condition = this->getCondition();
     Symbol condType = condition->checkType();
 
     if (condType != Bool) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+        semant_error(this) << "Condition must be a Bool, got " << condType << '.' <<endl;
     }
 
     StmtBlock thenExpr = this->getThen();
@@ -278,27 +262,27 @@ void IfStmt_class::check(Symbol type) {
 
     thenExpr->check(type);
     elseExpr->check(type);
-    has_return.pop();
+    has_return--;
 }
 
 void WhileStmt_class::check(Symbol type) {
-    has_return.push(1);
+    has_return++;
     in_loop++;
     Expr condition = this->getCondition();
     Symbol condType = condition->checkType();
 
     if (condType != Bool) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+        semant_error(this) << "Condition must be a Bool, got " << condType << '.' <<endl;
     }
 
     StmtBlock body = this->getBody();
     body->check(type);
     in_loop--;
-    has_return.pop();
+    has_return--;
 }
 
 void ForStmt_class::check(Symbol type) {
-    has_return.push(1);
+    has_return++;
     in_loop++;
     Expr init = this->getInit();
     Expr loop = this->getLoop();
@@ -309,17 +293,17 @@ void ForStmt_class::check(Symbol type) {
     Symbol condType = condition->checkType();
 
     if(condType != Bool && !condition->is_empty_Expr()) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
+        semant_error(this) << "Condition must be a Bool, got " << condType << '.' << endl;
     }
 
     StmtBlock body = this->getBody();
     body->check(type);
     in_loop--;
-    has_return.pop();
+    has_return--;
 }
 
 void ReturnStmt_class::check(Symbol type) {
-    if (has_return.size() == 1){
+    if (has_return == 1){
         has_return_bool = 1;
     }
 
@@ -327,7 +311,7 @@ void ReturnStmt_class::check(Symbol type) {
     Symbol thisType = value->checkType();
 
     if (thisType != type) {
-        semant_error(this) << "Returns " << thisType << " , but need " << type << endl;
+        semant_error(this) << "Returns " << thisType << " , but need " << type << '.' <<endl;
     }
 }
 
@@ -354,7 +338,7 @@ Symbol Call_class::checkType(){
                 for (int i=actuals->next(actuals->first()); actuals->more(i); i=actuals->next(i)) {
                     Symbol actualType = actuals->nth(i)->checkType();
                 }
-                setType(this, Void);
+                setType(Void);
                 result = Void;
             }
             else {
@@ -373,7 +357,7 @@ Symbol Call_class::checkType(){
             result = Void;
         }
         else {
-            CallDecl call = CallTable[callName];
+            CallDecl call = callTable[callName];
             Variables formals = call->getVariables();
             bool typeWrong = 0;
             int k = actuals->first();
@@ -385,7 +369,7 @@ Symbol Call_class::checkType(){
                 Symbol actualType = actuals->nth(k)->checkType();
                 Symbol formalType = formals->nth(i)->getType();
                 if (actualType != formalType) {
-                    semant_error(this) << "Function " << callName << ", the " << k+1 << " parameter should be " << formalType << " but provided a " << actualType << endl;
+                    semant_error(this) << "Function " << callName << ", the " << k+1 << " parameter should be " << formalType << " but provided a " << actualType << '.' <<endl;
                     typeWrong = 1;
                     break;
                 }
@@ -395,7 +379,7 @@ Symbol Call_class::checkType(){
                 semant_error(this) << "Function " << callName << " called with wrong number of arguments." << endl;
             }
             Symbol callType = call->getType();
-            setType(callType)
+            setType(callType);
             result = callType;
         }
     }
@@ -420,7 +404,7 @@ Symbol Assign_class::checkType(){
             setType(Float);
         }
         else {
-            semant_error(this) << "Right value must have type " << expectType << " , got " << actualType << endl;
+            semant_error(this) << "Right value must have type " << expectType << " , got " << actualType << '.' <<endl;
         }
         result = this->type;
     }
@@ -442,7 +426,7 @@ Symbol Add_class::checkType(){
         setType(Float);
     }
     else {
-        semant_error(this) << "Cannot add a " << leftType << " and a " << rightType << endl;
+        semant_error(this) << "Cannot add a " << leftType << " and a " << rightType << '.' << endl;
         setType(Void);
     }
     return this->type;
@@ -459,7 +443,7 @@ Symbol Minus_class::checkType(){
         setType(Float);
     }
     else {
-        semant_error(this) << "Cannot minus a " << leftType << " by a " << rightType << endl;
+        semant_error(this) << "Cannot minus a " << leftType << " by a " << rightType << '.' <<endl;
         setType(Void);
     }
     return this->type;
@@ -476,7 +460,7 @@ Symbol Multi_class::checkType(){
         setType(Float);
     }
     else {
-        semant_error(this) << "Cannot multiply a " << leftType << " with a " << rightType << endl;
+        semant_error(this) << "Cannot multiply a " << leftType << " with a " << rightType << '.' <<endl;
         setType(Void);
     }
     return this->type;
@@ -493,7 +477,7 @@ Symbol Divide_class::checkType(){
         setType(Float);
     }
     else {
-        semant_error(this) << "Cannot divide a " << leftType << " by a " << rightType << endl;
+        semant_error(this) << "Cannot divide a " << leftType << " by a " << rightType << '.' <<endl;
         setType(Void);
     }
     return this->type;
@@ -507,7 +491,7 @@ Symbol Mod_class::checkType(){
         setType(Int);
     }
     else {
-        semant_error(this) << "Cannot mod a " << leftType << " and a " << rightType << endl;
+        semant_error(this) << "Cannot mod a " << leftType << " and a " << rightType << '.' <<endl;
         setType(Void);
     }
     return this->type;
@@ -534,57 +518,176 @@ Symbol Lt_class::checkType(){
         setType(Bool);
     }
     else {
-        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(less)." <<endl;
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(less)." << endl;
+        setType(Void);
     }
     return this->type;
 }
 
 Symbol Le_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(less than or equal)." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Equ_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float)) || (sameType(leftType, Bool) && sameType(rightType, Bool))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(equal)." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Neq_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float)) || (sameType(leftType, Bool) && sameType(rightType, Bool))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(not equal)." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Ge_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(greater than or equal)." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Gt_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if ((sameType(leftType, Int) || sameType(leftType, Float)) && (sameType(rightType, Int) || sameType(rightType, Float))) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot compare a " << leftType << " and a " << rightType << "(greater)." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol And_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Bool) && sameType(rightType, Bool)) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot use and(&&) between " << leftType << " and " << rightType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Or_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Bool) && sameType(rightType, Bool)) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot use or(||) between " << leftType << " and " << rightType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Xor_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Bool) && sameType(rightType, Bool)) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot use xor(^) between " << leftType << " and " << rightType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Not_class::checkType(){
+    Symbol leftType = this->e1->checkType();
 
+    if (sameType(leftType, Bool)) {
+        setType(Bool);
+    }
+    else {
+        semant_error(this) << "Cannot use not(!) upon " << leftType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Bitand_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else {
+        semant_error(this) << "Cannot use bit-and(&) between " << leftType << " and " << rightType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Bitor_class::checkType(){
+    Symbol leftType = this->e1->checkType();
+    Symbol rightType = this->e2->checkType();
 
+    if (sameType(leftType, Int) && sameType(rightType, Int)) {
+        setType(Int);
+    }
+    else {
+        semant_error(this) << "Cannot use bit-or(|) between " << leftType << " and " << rightType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Bitnot_class::checkType(){
+    Symbol leftType = this->e1->checkType();
 
+    if (sameType(leftType, Int)) {
+        setType(Int);
+    }
+    else {
+        semant_error(this) << "Cannot use unary not(~) upon " << leftType << '.' <<endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol Const_int_class::checkType(){
@@ -608,7 +711,15 @@ Symbol Const_bool_class::checkType(){
 }
 
 Symbol Object_class::checkType(){
-
+    Symbol expectType = *objectEnv.lookup(this->var);
+    if (expectType) {
+        setType(expectType);
+    }
+    else {
+        semant_error(this) << "object " << this->var << " has not been defined." << endl;
+        setType(Void);
+    }
+    return this->type;
 }
 
 Symbol No_expr_class::checkType(){
