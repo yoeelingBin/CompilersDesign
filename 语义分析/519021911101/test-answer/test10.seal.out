@@ -1,0 +1,71 @@
+#4
+Program
+  #4
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #4
+    Statement Block
+      (variable declarations)
+      (
+      #5
+      Variable Declaration
+        #5
+        Variable
+          (name)
+          x
+          (type)
+          Int
+      )
+      (statements)
+      (
+      #6
+      Assign
+        (left value)
+        x
+        (right value)
+        #6
+        Const_int
+          (name)
+          10
+          (type)
+        : Int
+        (type)
+      : Int
+      #7
+      Assign
+        (left value)
+        x
+        (right value)
+        #7
+        +
+          (OP left)
+          #7
+          Object
+            (name)
+            x
+            (type)
+          : Int
+          (OP right)
+          #7
+          Const_int
+            (name)
+            1
+            (type)
+          : Int
+          (type)
+        : Int
+        (type)
+      : Int
+      #8
+      ReturnStmt
+        (return value)
+        #8
+        No_expr
+      )

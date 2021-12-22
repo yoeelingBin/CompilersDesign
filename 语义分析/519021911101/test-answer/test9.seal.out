@@ -1,0 +1,212 @@
+#4
+Program
+  #4
+  Call Declaration
+    (name)
+    get_a
+    (parameters)
+    (
+    #4
+    Variable
+      (name)
+      a
+      (type)
+      Int
+    )
+    (return type)
+    Int
+    (body)
+    #4
+    Statement Block
+      (variable declarations)
+      (
+      )
+      (statements)
+      (
+      #5
+      ReturnStmt
+        (return value)
+        #5
+        Object
+          (name)
+          a
+          (type)
+        : Int
+      )
+  #8
+  Call Declaration
+    (name)
+    get_b
+    (parameters)
+    (
+    #8
+    Variable
+      (name)
+      b
+      (type)
+      Int
+    )
+    (return type)
+    Int
+    (body)
+    #8
+    Statement Block
+      (variable declarations)
+      (
+      )
+      (statements)
+      (
+      #9
+      ReturnStmt
+        (return value)
+        #9
+        Object
+          (name)
+          b
+          (type)
+        : Int
+      )
+  #11
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #11
+    Statement Block
+      (variable declarations)
+      (
+      #12
+      Variable Declaration
+        #12
+        Variable
+          (name)
+          a
+          (type)
+          Int
+      #13
+      Variable Declaration
+        #13
+        Variable
+          (name)
+          b
+          (type)
+          Int
+      )
+      (statements)
+      (
+      #14
+      Assign
+        (left value)
+        a
+        (right value)
+        #14
+        Const_int
+          (name)
+          10
+          (type)
+        : Int
+        (type)
+      : Int
+      #15
+      Assign
+        (left value)
+        b
+        (right value)
+        #15
+        Const_int
+          (name)
+          100
+          (type)
+        : Int
+        (type)
+      : Int
+      #16
+      IfStmt
+        (condition)
+        #16
+        >
+          (OP left)
+          #16
+          Call
+            (name)
+            get_a
+            (actual parameters)
+            (
+            #16
+            Actual
+              (expr)
+              #16
+              Object
+                (name)
+                a
+                (type)
+              : Int
+              (type)
+            : Int
+            )
+            (type)
+          : Int
+          (OP right)
+          #16
+          Call
+            (name)
+            get_b
+            (actual parameters)
+            (
+            #16
+            Actual
+              (expr)
+              #16
+              Object
+                (name)
+                b
+                (type)
+              : Int
+              (type)
+            : Int
+            )
+            (type)
+          : Int
+          (type)
+        (then)
+        #16
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #17
+          Assign
+            (left value)
+            b
+            (right value)
+            #17
+            Object
+              (name)
+              a
+              (type)
+            : Int
+            (type)
+          : Int
+          )
+        (else)
+        #16
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          )
+      #19
+      ReturnStmt
+        (return value)
+        #19
+        No_expr
+      )

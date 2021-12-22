@@ -1,0 +1,16 @@
+/* 
+this a correct example of SEAL 
+*/
+Void func main() {
+	Int c;
+	c=equal(2,3);
+	return;
+}
+Int func equal(Int a, Int b) {
+   	if a != b{
+		return a+b;
+	}
+	return a;
+}
+
+

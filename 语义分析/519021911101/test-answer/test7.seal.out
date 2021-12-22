@@ -1,0 +1,126 @@
+#4
+Program
+  #4
+  Call Declaration
+    (name)
+    main
+    (parameters)
+    (
+    )
+    (return type)
+    Void
+    (body)
+    #4
+    Statement Block
+      (variable declarations)
+      (
+      #5
+      Variable Declaration
+        #5
+        Variable
+          (name)
+          a
+          (type)
+          Bool
+      #6
+      Variable Declaration
+        #6
+        Variable
+          (name)
+          b
+          (type)
+          Bool
+      #7
+      Variable Declaration
+        #7
+        Variable
+          (name)
+          c
+          (type)
+          Int
+      )
+      (statements)
+      (
+      #9
+      Assign
+        (left value)
+        a
+        (right value)
+        #9
+        Const_bool
+          (name)
+          1
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #10
+      Assign
+        (left value)
+        b
+        (right value)
+        #10
+        Const_bool
+          (name)
+          0
+          (type)
+        : Bool
+        (type)
+      : Bool
+      #12
+      IfStmt
+        (condition)
+        #12
+        ||
+          (OP left)
+          #12
+          Object
+            (name)
+            a
+            (type)
+          : Bool
+          (OP right)
+          #12
+          Object
+            (name)
+            b
+            (type)
+          : Bool
+          (type)
+        (then)
+        #12
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          #13
+          Assign
+            (left value)
+            c
+            (right value)
+            #13
+            Const_int
+              (name)
+              777
+              (type)
+            : Int
+            (type)
+          : Int
+          )
+        (else)
+        #12
+        Statement Block
+          (variable declarations)
+          (
+          )
+          (statements)
+          (
+          )
+      #15
+      ReturnStmt
+        (return value)
+        #15
+        No_expr
+      )

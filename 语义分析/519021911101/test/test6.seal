@@ -1,0 +1,15 @@
+/* 
+this a false example of SEAL 
+6: main function should have return type Void.
+9: break must be used in a loop sentence.
+*/
+Int func main(){
+	Int a;
+	a=2020;
+	break;
+	while a<2050{
+    	a=a+10;
+	}
+	return 1;
+}
+ 

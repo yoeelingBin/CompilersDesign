@@ -1,0 +1,24 @@
+/* 
+this a correct false of SEAL 
+13: Function loop, type Float of parameter a does not conform to declared type Bool.
+7: Function main must have an overall return statement.
+Compilation halted due to static semantic errors.
+*/
+Void func main() {
+	Bool a;
+	Float b;
+	Float c;
+	a=true;
+	b=2.0;
+	c=loop(b,a);
+}
+Float func loop(Bool a, Float b) {
+    while a{
+        b=b+1;
+        if b>=99999.9{
+            a=false;
+            break;
+        }
+    }
+    return b;
+}
