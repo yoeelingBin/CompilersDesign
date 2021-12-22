@@ -11,14 +11,14 @@ static ostream& error_stream = cerr;
 static int semant_errors = 0;
 
 static Decl curr_decl = 0;
-static bool has_return_bool = 0;
-static int in_loop = 0;
-static int has_return = 0;
+static bool has_return_bool = 0; // return bool
+static int in_loop = 0; // whether in loop
+static int has_return = 0; // whether func has return
 
 typedef SymbolTable<Symbol, Symbol> ObjectEnvironment; // name, type
 ObjectEnvironment objectEnv;
 
-typedef std::map<Symbol, CallDecl> CallTable;
+typedef std::map<Symbol, CallDecl> CallTable; // callTable，store functions
 CallTable callTable;
 
 
@@ -52,15 +52,15 @@ static ostream& internal_error(int lineno) {
 //
 //////////////////////////////////////////////////////////////////////
 
-static Symbol 
-    Int,
-    Float,
-    String,
-    Bool,
-    Void,
-    Main,
-    print
-    ;
+static Symbol
+        Int,
+        Float,
+        String,
+        Bool,
+        Void,
+        Main,
+        print
+;
 
 bool isValidCallName(Symbol type) {
     return type != (Symbol)print;
@@ -80,7 +80,7 @@ static void initialize_constants(void) {
     Int         = idtable.add_string("Int");
     String      = idtable.add_string("String");
     Float       = idtable.add_string("Float");
-    Void        = idtable.add_string("Void");  
+    Void        = idtable.add_string("Void");
     // Main function
     Main        = idtable.add_string("main");
 
@@ -90,8 +90,8 @@ static void initialize_constants(void) {
 
 /*
     TODO :
-    you should fill the following function defines, so that semant() can realize a semantic 
-    analysis in a recursive way. 
+    you should fill the following function defines, so that semant() can realize a semantic
+    analysis in a recursive way.
     Of course, you can add any other functions to help.
 */
 
@@ -111,10 +111,11 @@ static void install_calls(Decls decls) {
                 semant_error(tmp_decl) << "Function " << name << " has been previously defined." << endl;
             }
             else if (sameType(name, print)){
+                // function printf can't be redefined
                 semant_error(tmp_decl) << "Function printf cannot be redefination." << endl;
             }
             else if (!isValidCallName(name)) {
-                // function printf can't be defined twice
+                // function can't have a name as printf
                 semant_error(tmp_decl) << "Function printf cannot have a name as printf." << endl;
             }
             else if (type != Bool && type != Int && type != String && type !=  Float && type != Void) {
@@ -122,7 +123,7 @@ static void install_calls(Decls decls) {
                 semant_error(tmp_decl) << "Function returnType error." << endl;
             }
             else {
-                // update tables
+                // install func into callTable
                 callTable[name] = call;
             }
         }
@@ -130,6 +131,7 @@ static void install_calls(Decls decls) {
 }
 
 static void install_globalVars(Decls decls) {
+    // if not a decl, then global variable
     objectEnv.enterscope();
     for (int i=decls->first(); decls->more(i); i=decls->next(i)){
         Decl tmp_decl = decls->nth(i);
@@ -171,9 +173,11 @@ void VariableDecl_class::check() {
     Symbol name = this->getName();
     Symbol type = this->getType();
     if (objectEnv.probe(name)) {
-        semant_error(this) <<"variable" << name << " was previously defined." << endl;
+        // variables can't be redefined
+        semant_error(this) << "variable" << name << " was previously defined." << endl;
     }
     else if (!isValidTypeName(type)) {
+        // variables can't be Void type
         semant_error(this) << "variable " << name << " cannot be of type Void. Void can just be used as return type." << endl;
     }
     else {
@@ -188,8 +192,8 @@ void CallDecl_class::check() {
     StmtBlock body = this->getBody();
 
     if (this->paras->len() > 6) {
-    // func has more than 6 parameters
-    semant_error(this) << "Function " << this->getName() << " has more than 6 parameters." << endl;
+        // func has more than 6 parameters
+        semant_error(this) << "Function " << this->getName() << " has more than 6 parameters." << endl;
     }
 
     for (int i=paras->first(); paras->more(i); i=paras->next(i)) {
@@ -198,21 +202,24 @@ void CallDecl_class::check() {
         Symbol paraType = tmp_para->getType();
 
         if(!isValidTypeName(paraType)) {
-            // morphological parameters type can't be Void
+            // parameters type can't be Void
             semant_error(this) << "Function " << this->getName() << " 's parameter has an invalid type Void." <<endl;
         }
         else if (objectEnv.probe(paraName)) {
+            // parameters duplicate name
             semant_error(this) << "Function " << this->getName() << " 's parameter has a duplicate name " << paraName << "." << endl;
         }
         else {
+            // add paraname and paratype to SymbolTable
             objectEnv.addid(paraName, new Symbol(paraType));
         }
     }
-    // not sure here
+    // check body type
     body->check(getType());
 
     objectEnv.exitscope();
     if (!has_return_bool) {
+        // check whether func has return
         semant_error(this) << "Function " << this->getName() << " must have an overall return statement." << endl;
     }
 }
@@ -241,7 +248,8 @@ void IfStmt_class::check(Symbol type) {
     Symbol condType = condition->checkType();
 
     if (condType != Bool) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << '.' <<endl;
+        // condition must be Bool
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
     }
 
     StmtBlock thenExpr = this->getThen();
@@ -259,7 +267,8 @@ void WhileStmt_class::check(Symbol type) {
     Symbol condType = condition->checkType();
 
     if (condType != Bool) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << '.' <<endl;
+        // condition must be Bool
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
     }
 
     StmtBlock body = this->getBody();
@@ -280,7 +289,8 @@ void ForStmt_class::check(Symbol type) {
     Symbol condType = condition->checkType();
 
     if(condType != Bool && !condition->is_empty_Expr()) {
-        semant_error(this) << "Condition must be a Bool, got " << condType << '.' << endl;
+        // condition must be Bool
+        semant_error(this) << "Condition must be a Bool, got " << condType << endl;
     }
 
     StmtBlock body = this->getBody();
@@ -720,7 +730,7 @@ void Program_class::semant() {
     check_main();
     install_globalVars(decls);
     check_calls(decls);
-    
+
     if (semant_errors > 0) {
         cerr << "Compilation halted due to static semantic errors." << endl;
         exit(1);
