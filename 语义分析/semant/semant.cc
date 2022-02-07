@@ -174,7 +174,7 @@ void VariableDecl_class::check() {
     Symbol type = this->getType();
     if (objectEnv.probe(name)) {
         // variables can't be redefined
-        semant_error(this) << "variable" << name << " was previously defined." << endl;
+        semant_error(this) << "variable " << name << " was previously defined." << endl;
     }
     else if (!isValidTypeName(type)) {
         // variables can't be Void type
